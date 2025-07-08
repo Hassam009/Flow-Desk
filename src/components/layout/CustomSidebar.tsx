@@ -2,13 +2,14 @@ import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
-  SidebarGroupLabel,
+  // SidebarGroupLabel,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton
 } from "../ui/sidebar";
 import { Home, List, AppWindow } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function CustomSidebar() {
   return (
@@ -27,20 +28,26 @@ export default function CustomSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton>
+                  <Link to="/" className="flex items-center">
                   <Home className="mr-2 h-4 w-4" />
                   Dashboard
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton>
-                  <List className="mr-2 h-4 w-4" />
-                  Tasks
+                  <Link to="/tasks" className="flex items-center">
+                    <List className="mr-2 h-4 w-4" />
+                    Tasks
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton>
-                  <AppWindow className="mr-2 h-4 w-4" />
-                  Apps
+                  <Link to="/apps" className="flex items-center">
+                    <AppWindow className="mr-2 h-4 w-4" />
+                    Apps
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>

@@ -9,7 +9,7 @@ export default function AppShell({ children }: { children?: React.ReactNode }) {
         <CustomNav />
         <div className="flex flex-1">
           <CustomSidebar />
-          <main className="flex-1 overflow-y-auto">
+          <main className="flex-1 w-full min-w-0 flex flex-col overflow-y-auto">
             {children}
           </main>
         </div>
