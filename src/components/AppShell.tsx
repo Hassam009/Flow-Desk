@@ -1,6 +1,21 @@
-import CustomSidebar from "./layout/CustomSidebar";
-import CustomNav from "./layout/CustomNav";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import CustomSidebar from "./SharedComponent/CustomSidebar";
+import CustomNav from "./SharedComponent/CustomNav";
+import { SidebarProvider, useSidebar } from "@/components/ui/sidebar";
+
+function MainContent({ children }: { children?: React.ReactNode }) {
+  const { state } = useSidebar(); // 'expanded' or 'collapsed'
+
+  const leftMargin = state === "collapsed" ? "60px" : "260px";
+
+  return (
+    <main
+      className="flex-1 w-full min-w-0 flex flex-col overflow-y-auto transition-all duration-300"
+      style={{ marginLeft: leftMargin }}
+    >
+      {children}
+    </main>
+  );
+}
 
 export default function AppShell({ children }: { children?: React.ReactNode }) {
   return (
@@ -9,11 +24,9 @@ export default function AppShell({ children }: { children?: React.ReactNode }) {
         <CustomNav />
         <div className="flex flex-1">
           <CustomSidebar />
-          <main className="flex-1 w-full min-w-0 flex flex-col overflow-y-auto">
-            {children}
-          </main>
+          <MainContent>{children}</MainContent>
         </div>
       </div>
     </SidebarProvider>
   );
-}   
+}
