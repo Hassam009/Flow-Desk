@@ -44,7 +44,7 @@ export default function CustomSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton>
-                  <Link to="/apps" className="flex items-center">
+                  <Link to="/AppPage" className="flex items-center">
                     <AppWindow className="mr-2 h-4 w-4" />
                     Apps
                   </Link>

@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Discord",
+    "description": "Connect with Discord for seamless team communication.",
+    "status": "Connect"
+  },
+  {
+    "name": "Docker",
+    "description": "Effortlessly manage Docker containers on your dashboard.",
+    "status": "Connect"
+  },
+  {
+    "name": "Figma",
+    "description": "View and collaborate on Figma designs in one place.",
+    "status": "Connected"
+  },
+  {
+    "name": "GitHub",
+    "description": "Streamline code management with GitHub integration.",
+    "status": "Connect"
+  },
+  {
+    "name": "GitLab",
+    "description": "Efficiently manage code projects with GitLab integration.",
+    "status": "Connect"
+  },
+  {
+    "name": "Gmail",
+    "description": "Access and manage Gmail messages effortlessly.",
+    "status": "Connected"
+  },
+  {
+    "name": "Medium",
+    "description": "Explore and share Medium stories on your dashboard.",
+    "status": "Connect"
+  },
+  {
+    "name": "Notion",
+    "description": "Effortlessly sync Notion pages for seamless collaboration.",
+    "status": "Connected"
+  },
+  {
+    "name": "Skype",
+    "description": "Connect with Skype contacts seamlessly.",
+    "status": "Connect"
+  },
+  {
+    "name": "Slack",
+    "description": "Integrate Slack for efficient team communication.",
+    "status": "Connect"
+  },
+  {
+    "name": "Stripe",
+    "description": "Easily manage Stripe transactions and payments.",
+    "status": "Connect"
+  },
+  {
+    "name": "Telegram",
+    "description": "Connect with Telegram for real-time communication.",
+    "status": "Connect"
+  }
+]
