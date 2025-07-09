@@ -1,0 +1,27 @@
+[
+    {
+      "title": "Total Revenue",
+      "value": "$45,231.89",
+      "description": "+20.1% from last month",
+      "icon": "dollar"
+    },
+    {
+      "title": "Subscriptions",
+      "value": "+2350",
+      "description": "+180.1% from last month",
+      "icon": "users"
+    },
+    {
+      "title": "Sales",
+      "value": "+12,234",
+      "description": "+19% from last month",
+      "icon": "credit"
+    },
+    {
+      "title": "Active Now",
+      "value": "+573",
+      "description": "+201 since last hour",
+      "icon": "activity"
+    }
+  ]
+  

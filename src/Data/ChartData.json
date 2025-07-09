@@ -1,0 +1,15 @@
+[
+    { "name": "Jan", "total": 3000 },
+    { "name": "Feb", "total": 3500 },
+    { "name": "Mar", "total": 2000 },
+    { "name": "Apr", "total": 3980 },
+    { "name": "May", "total": 1890 },
+    { "name": "Jun", "total": 2390 },
+    { "name": "Jul", "total": 1790 },
+    { "name": "Aug", "total": 3490 },
+    { "name": "Sep", "total": 1490 },
+    { "name": "Oct", "total": 1190 },
+    { "name": "Nov", "total": 2490 },
+    { "name": "Dec", "total": 1390 }
+  ]
+  
