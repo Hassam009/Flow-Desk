@@ -12,23 +12,20 @@ export default function LoginPage() {
   const [password, setPassword]=useState("");
   const navigate = useNavigate();
 
-  async function handleLogin(){
+ function handleLogin(){
     if(!email){
       alert("Please enter your email");
     return;
-    }try{
-      const res=await fetch ("https://jsonplaceholder.typicode.com/users")
-      const users = await res.json();
-      const foundUser = users.find(user => user.email.toLowerCase() === email.toLowerCase());
-      if(foundUser){
-        // alert(`Login successful! Welcome ${foundUser.name}`);
-        navigate("/dashboard"); 
-      } else {
-        alert("Invalid email");
-      }
-    } catch (error) {
-      alert("Error logging in");
-      console.error(error);
+    }
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    const foundUser = users.find(
+      (user) => user.email === email && user.password === password
+    );
+    if (foundUser) {
+      alert(`Welcome back, ${foundUser.email}`);
+      navigate("/Dashboard");
+    } else {
+      alert("Invalid email or password");
     }
   }
 

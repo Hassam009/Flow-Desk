@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import AppPage from "./pages/AppPage";
 import UserPage from "./pages/UserPage";
 import SignupPage from "./pages/SignupPage";
+import ChatPage from "./pages/ChatPage";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
                 <Route path="TaskPage" element={<TaskPage />} />
                 <Route path="AppPage" element={<AppPage />} />
                 <Route path="UserPage" element={<UserPage />} />
+                <Route path="Chats" element={<ChatPage />} />
               </Routes>
             </AppShell>
           }

@@ -1,15 +1,17 @@
 import CustomSidebar from "./SharedComponent/CustomSidebar";
 import CustomNav from "./SharedComponent/CustomNav";
 import { SidebarProvider, useSidebar } from "@/components/ui/sidebar";
+import { useLocation } from "react-router-dom";
 
 function MainContent({ children }: { children?: React.ReactNode }) {
-  const { state } = useSidebar(); // 'expanded' or 'collapsed'
-
+  const { state } = useSidebar(); 
+  const location = useLocation();
   const leftMargin = state === "collapsed" ? "50px" : "240px";
-
+  // Remove overflow-y-auto only for chat page
+  const isChatPage = location.pathname.toLowerCase().includes("chat");
   return (
     <main
-      className="flex-1 w-full min-w-0 flex flex-col overflow-y-auto transition-all duration-300 bg-zinc-800"
+      className={`flex-1 min-h-0 flex flex-col transition-all duration-300 bg-zinc-800 ${isChatPage ? "overflow-hidden" : "overflow-y-auto"}`}
       style={{ marginLeft: leftMargin }}
     >
       {children}
@@ -20,11 +22,10 @@ function MainContent({ children }: { children?: React.ReactNode }) {
 export default function AppShell({ children }: { children?: React.ReactNode }) {
   return (
     <SidebarProvider>
-      <div className="flex flex-col min-h-screen w-full bg-gray-50 dark:bg-zinc-900 dark:text-gray-100">
-      {/* <div className="min-h-screen bg-white dark:bg-zinc-900 text-black dark:text-white"> */}
-        <CustomNav />
-        <div className="flex flex-1">
-          <CustomSidebar/>
+      <div className="flex flex-col min-h-screen w-full">
+        <CustomNav /> {/* Should have a fixed height, e.g., h-16 */}
+        <div className="flex flex-1 min-h-0">
+          <CustomSidebar />
           <MainContent>{children}</MainContent>
         </div>
       </div>

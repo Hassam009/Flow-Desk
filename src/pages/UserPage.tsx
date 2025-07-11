@@ -14,13 +14,15 @@ import {
   Plus,
   Download,
   Filter,
-  ArrowRight,
-  ArrowDown,
-  ArrowUp,
-  Clock,
-  Clock9,
-  XCircle,
+  User,
+  Users,
+  ShieldCheck,
+  Ban,
   CheckCircle,
+  XCircle,
+  Clock,
+  Mail,
+  PauseCircle,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -56,7 +58,8 @@ export default function TaskPage() {
       </div>
 
       <div className="flex items-center gap-2 mb-4 bg-white dark:bg-zinc-800">
-        <Input placeholder="Filter tasks..." className="max-w-xs" />
+        <Input placeholder="Filter users..." className="max-w-xs" />
+        {/* Status Dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="flex items-center gap-1">
@@ -68,46 +71,46 @@ export default function TaskPage() {
             align="start"
             className="bg-white border rounded-md shadow-md"
           >
-            <DropdownMenuItem onClick={() => console.log("Todo selected")}>
-            <Clock className="w-4 h-4 text-gray-500" />  Todo
+            <DropdownMenuItem>
+              <CheckCircle className="w-4 h-4 text-green-500" /> Active
             </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => console.log("In Progress selected")}
-            >
-            <Clock9 className="w-4 h-4 text-blue-500" />  In Progress
+            <DropdownMenuItem>
+              <Ban className="w-4 h-4 text-red-500" /> Suspended
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => console.log("Done selected")}>
-            <CheckCircle className="w-4 h-4 text-green-500" />  Done
+            <DropdownMenuItem>
+              <PauseCircle className="w-4 h-4 text-gray-400" /> Inactive
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => console.log("Canceled selected")}>
-            <XCircle className="w-4 h-4 text-red-500" />   Canceled
+            <DropdownMenuItem>
+              <Mail className="w-4 h-4 text-blue-500" /> Invited
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-
+        {/* Role Dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="flex items-center gap-1">
               <Plus className="w-4 h-4" />
-              Priority
+              Role
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="start"
             className="bg-white border rounded-md shadow-md"
           >
-            <DropdownMenuItem onClick={() => console.log("High selected")}>
-            <ArrowUp className="w-4 h-4" />    High
+            <DropdownMenuItem>
+              <Users className="w-4 h-4 text-purple-500" /> Manager
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => console.log("Medium selected")}>
-            <ArrowRight className="w-4 h-4" />    Medium
+            <DropdownMenuItem>
+              <ShieldCheck className="w-4 h-4 text-blue-500" /> Admin
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => console.log("Low selected")}>
-            <ArrowDown className="w-4 h-4" />    Low
+            <DropdownMenuItem>
+              <User className="w-4 h-4 text-gray-700" /> Cashier
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <ShieldCheck className="w-4 h-4 text-orange-500" /> Superadmin
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-
         <Button variant="outline" className="ml-auto">
           <Filter className="w-4 h-4" />
         </Button>

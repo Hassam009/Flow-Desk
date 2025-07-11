@@ -67,19 +67,19 @@ export default function CustomSidebar() {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              {/* <SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <Link to="/Chats" className="flex items-center">
+                    <AllIcons name="users" />
+                    {state === "collapsed" ? "" : "Chats"}
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
                 <SidebarMenuButton>
                   <Link to="/" className="flex items-center">
                     <AppWindow className="mr-2 h-4 w-4" />
-                    {state === "collapsed" ? "" : "Login"}
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem> */}
-              <SidebarMenuItem>
-                <SidebarMenuButton>
-                  <Link to="/Signup" className="flex items-center">
-                    <AppWindow className="mr-2 h-4 w-4" />
-                    {state === "collapsed" ? "" : "Signup"}
+                    {state === "collapsed" ? "" : "Logout"}
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

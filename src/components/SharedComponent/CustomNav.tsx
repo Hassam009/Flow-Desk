@@ -5,7 +5,7 @@ import {
   NavigationMenuLink
 } from "../ui/navigation-menu";
 import { SidebarTrigger, useSidebar } from "../ui/sidebar";
-import { ThemeToggle } from "../ThemeToggle"; // ⬅️ NEW
+import { ThemeToggle } from "../ThemeToggle";
 
 export default function CustomNav() {
   const { state } = useSidebar();
@@ -14,7 +14,7 @@ export default function CustomNav() {
   return (
     <nav className="w-full border-b bg-white dark:bg-zinc-800" style={{ zIndex: 10 }}>
       <div
-        className="flex justify-between items-center h-16 px-8"
+        className="flex justify-between items-center h-[4rem] px-8"
         style={{ paddingLeft: leftPadding }}
       >
         <div className="flex items-center gap-6">

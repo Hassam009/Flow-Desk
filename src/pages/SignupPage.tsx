@@ -4,11 +4,42 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { EyeOff, Eye } from "lucide-react"
 import { useState } from "react"
-
+import {useNavigate} from "react-router-dom";
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [email, setEmail]=useState("");
+  const [password, setPassword]=useState("");
+  const [confirmPassword, setConfirmPassword]=useState("");
+  const navigate=useNavigate();
 
+
+  function handleSignup(){
+    if(!email || !password || !confirmPassword){
+      alert("Please fill all fields")
+      return;
+    }
+
+    if(password!==confirmPassword){
+      alert("Password do not match");
+      return;
+    }
+
+    const existingUsers=JSON.parse(localStorage.getItem("user") || "[]");
+    const userExists= existingUsers.some((user)=>user.email===email);
+
+    if(userExists){
+      alert("User already exist")
+      return;
+    }
+
+    const newUser={email, password};
+    existingUsers.push(newUser);
+    localStorage.setItem("users", JSON.stringify(existingUsers));
+
+    alert("Account created Successfully");
+    navigate("/")
+  }
   return (
     <div className="min-h-screen flex items-center justify-center px-4 bg-white dark:bg-zinc-800">
       <Card className="w-full max-w-sm p-6 border border-gray-200 shadow-lg bg-white dark:bg-zinc-800">
@@ -25,6 +56,8 @@ export default function SignupPage() {
               id="email"
               type="email"
               placeholder="name@example.com"
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
             />
           </div>
 
@@ -36,6 +69,8 @@ export default function SignupPage() {
                 type={showPassword ? "text" : "password"}
                 placeholder="********"
                 className="bg-white dark:bg-zinc-800"
+                value={password}
+  onChange={(e) => setPassword(e.target.value)}
               />
               <button
                 type="button"
@@ -55,6 +90,9 @@ export default function SignupPage() {
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder="********"
                 className="bg-white dark:bg-zinc-800"
+                value={confirmPassword}
+  onChange={(e) => setConfirmPassword(e.target.value)}
+                
               />
               <button
                 type="button"
@@ -66,7 +104,9 @@ export default function SignupPage() {
             </div>
           </div>
 
-          <Button className="w-full bg-black text-white hover:bg-gray-900">
+          <Button className="w-full bg-black text-white hover:bg-gray-900"
+          onClick={handleSignup}
+          >
             Create Account
           </Button>
         </CardContent>
