@@ -30,10 +30,10 @@ function getName(email: string) {
 
 export function RecentSalesCard({ data }: RecentSalesCardProps) {
   return (
-    <div className="rounded-xl border bg-white p-6 shadow-md w-full h-[400px]">
+    <div className="rounded-xl border p-6 shadow-md w-full h-[400px]  bg-white dark:bg-zinc-800">
       <h3 className="text-lg font-semibold mb-1">Recent Sales</h3>
       <p className="text-sm text-muted-foreground mb-4">You made {data.length} sales this month.</p>
-      <ul className="flex flex-col gap-6">
+      <ul className="flex flex-col gap-6 bg-white dark:bg-zinc-800">
         {data.map((sale) => (
           <li key={sale.id} className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -41,11 +41,11 @@ export function RecentSalesCard({ data }: RecentSalesCardProps) {
                 {getInitials(sale.email)}
               </div>
               <div>
-                <div className="font-medium text-gray-900">{getName(sale.email)}</div>
-                <div className="text-xs text-gray-500">{sale.email}</div>
+                <div className="font-medium  bg-white dark:bg-zinc-800">{getName(sale.email)}</div>
+                <div className="text-xs  bg-white dark:bg-zinc-800">{sale.email}</div>
               </div>
             </div>
-            <div className="font-bold text-black-700 text-base">{sale.amount.toLocaleString("en-US", { style: "currency", currency: "USD" })}</div>
+            <div className="font-bold bg-white dark:bg-zinc-800 text-base">{sale.amount.toLocaleString("en-US", { style: "currency", currency: "USD" })}</div>
           </li>
         ))}
       </ul>

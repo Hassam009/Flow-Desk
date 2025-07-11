@@ -1,0 +1,83 @@
+[
+    {
+      "username": "carolyne_kiehn",
+      "name": "Carolyne Kiehn",
+      "email": "carolyne4@hotmail.com",
+      "phone": "+13559828779",
+      "status": "active",
+      "role": "manager"
+    },
+    {
+      "username": "clint.roob",
+      "name": "Clint Roob",
+      "email": "clint56@yahoo.com",
+      "phone": "+12824612511",
+      "status": "suspended",
+      "role": "admin"
+    },
+    {
+      "username": "vito_morissette",
+      "name": "Vito Morissette",
+      "email": "vito_gislason@hotmail.com",
+      "phone": "+13985924592",
+      "status": "inactive",
+      "role": "manager"
+    },
+    {
+      "username": "izabella_howell",
+      "name": "Izabella Howell",
+      "email": "izabella_wehner82@yahoo.com",
+      "phone": "+12857419415",
+      "status": "invited",
+      "role": "cashier"
+    },
+    {
+      "username": "hailey.dibbert",
+      "name": "Hailey Dibbert",
+      "email": "hailey.keeling@yahoo.com",
+      "phone": "+16974606351",
+      "status": "suspended",
+      "role": "cashier"
+    },
+    {
+      "username": "avis_mueller",
+      "name": "Avis Mueller",
+      "email": "avis.dietrich24@gmail.com",
+      "phone": "+17226569055",
+      "status": "invited",
+      "role": "admin"
+    },
+    {
+      "username": "florence.tremblay",
+      "name": "Florence Tremblay",
+      "email": "florence.heathcote-gorczany91@gmail.com",
+      "phone": "+17146739021",
+      "status": "suspended",
+      "role": "admin"
+    },
+    {
+      "username": "christy.nikolaus",
+      "name": "Christy Nikolaus",
+      "email": "christy51@hotmail.com",
+      "phone": "+18883102504",
+      "status": "inactive",
+      "role": "admin"
+    },
+    {
+      "username": "brenda_king9",
+      "name": "Brenda King",
+      "email": "brenda53@gmail.com",
+      "phone": "+14346556453",
+      "status": "inactive",
+      "role": "superadmin"
+    },
+    {
+      "username": "michele_stracke97",
+      "name": "Michele Stracke",
+      "email": "michele.zulauf@hotmail.com",
+      "phone": "+15913732558",
+      "status": "suspended",
+      "role": "manager"
+    }
+  ]
+  

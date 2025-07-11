@@ -2,37 +2,67 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
 import { Github, Facebook, EyeOff, Eye } from "lucide-react"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
+  const [email, setEmail]=useState("");
+  const [password, setPassword]=useState("");
+  const navigate = useNavigate();
+
+  async function handleLogin(){
+    if(!email){
+      alert("Please enter your email");
+    return;
+    }try{
+      const res=await fetch ("https://jsonplaceholder.typicode.com/users")
+      const users = await res.json();
+      const foundUser = users.find(user => user.email.toLowerCase() === email.toLowerCase());
+      if(foundUser){
+        // alert(`Login successful! Welcome ${foundUser.name}`);
+        navigate("/dashboard"); 
+      } else {
+        alert("Invalid email");
+      }
+    } catch (error) {
+      alert("Error logging in");
+      console.error(error);
+    }
+  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <Card className="w-full max-w-sm p-6 border border-gray-200 shadow-lg">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-white dark:bg-zinc-800">
+      <Card className="w-full max-w-sm p-6 border border-gray-200 shadow-lg bg-white dark:bg-zinc-800">
         <CardHeader>
-          <h2 className="text-xl font-semibold text-gray-900">Login</h2>
-          <p className="text-sm text-gray-500">Enter your email and password below to log into your account</p>
+          <h2 className="text-xl font-semibold  bg-white dark:bg-zinc-800">Login</h2>
+          <p className="text-sm text-gray-400 bg-white dark:bg-zinc-800">Enter your email and password below to log into your account</p>
         </CardHeader>
 
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="name@example.com" />
+            <Input className="bg-white dark:bg-zinc-800"
+             id="email" type="email" placeholder="name@example.com"
+             value={email}
+             onChange={e=>setEmail(e.target.value)}
+              />
           </div>
 
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <Label htmlFor="password">Password</Label>
-              <a href="#" className="text-sm text-blue-600 hover:underline">Forgot password?</a>
+              <a href="#" className="text-sm bg-white dark:bg-zinc-800 hover:underline">Forgot password?</a>
             </div>
             <div className="relative">
               <Input
                 id="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="********"
+                value={password}
+  onChange={e => setPassword(e.target.value)}
+  className="bg-white dark:bg-zinc-800"
               />
               <button
                 type="button"
@@ -44,26 +74,28 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <Button className="w-full bg-black text-white hover:bg-gray-900">
+          <Button className="w-full bg-black text-white hover:bg-gray-900" 
+          onClick={handleLogin}
+          >
             Login
           </Button>
-
+{/* 
           <div className="flex items-center justify-center gap-2">
-            <Separator className="w-full" />
-            <span className="text-xs text-gray-400">OR CONTINUE WITH</span>
-            <Separator className="w-full" />
-          </div>
+        //     <Separator className="w-full" />
+        //     <span className="text-xs  bg-white dark:bg-zinc-800">OR CONTINUE WITH</span>
+        //     <Separator className="w-full" />
+        //   </div>
 
-          <div className="flex gap-2">
-            <Button variant="outline" className="w-full">
-              <Github className="w-4 h-4 mr-2" />
-              GitHub
-            </Button>
-            <Button variant="outline" className="w-full">
-              <Facebook className="w-4 h-4 mr-2" />
-              Facebook
-            </Button>
-          </div>
+        //   <div className="flex gap-2">
+        //     <Button variant="outline" className="w-full">
+        //       <Github className="w-4 h-4 mr-2" />
+        //       GitHub
+        //     </Button>
+        //     <Button variant="outline" className="w-full">
+        //       <Facebook className="w-4 h-4 mr-2" />
+        //       Facebook
+        //     </Button>
+        //   </div> */}
         </CardContent>
 
         <CardFooter className="text-xs text-center text-gray-500 mt-4">

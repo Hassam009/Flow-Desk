@@ -9,10 +9,10 @@ import {
   SidebarMenuButton,
   useSidebar
 } from "../ui/sidebar";
-import { Home, List, AppWindow } from "lucide-react";
+import { AppWindow } from "lucide-react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-
+import AllIcons from "./AllIcons";
 
 export default function CustomSidebar() {
   const { state } = useSidebar();
@@ -21,7 +21,7 @@ export default function CustomSidebar() {
       collapsible="icon"
       data-state={state} 
       className={cn(
-        "bg-white border-r h-full shadow-sm rounded-r-xl",
+        "bg-white border-r h-full shadow-sm rounded-r-xl  bg-white dark:bg-zinc-800",
         state === "collapsed" ? "w-[48px]" : "w-60" 
       )}
     >
@@ -36,16 +36,17 @@ export default function CustomSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton>
-                  <Link to="/" className="flex items-center">
-                    <Home className="mr-2 h-4 w-4" />
-                    {state === "collapsed" ? "" : "Dashboard"}
-                  </Link>
+                <Link to="/Dashboard" className="flex items-center">
+  <AllIcons name="dashboard" />
+  {state === "collapsed" ? "" : "Dashboard"}
+</Link>
+
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton>
                   <Link to="/TaskPage" className="flex items-center">
-                    <List className="mr-2 h-4 w-4" />
+                    <AllIcons name="tasks" />
                     {state === "collapsed" ? "" : "Tasks"}
                   </Link>
                 </SidebarMenuButton>
@@ -53,16 +54,32 @@ export default function CustomSidebar() {
               <SidebarMenuItem>
                 <SidebarMenuButton>
                   <Link to="/AppPage" className="flex items-center">
-                    <AppWindow className="mr-2 h-4 w-4" />
+                    <AllIcons name="apps" />
                     {state === "collapsed" ? "" : "Apps"}
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton>
-                  <Link to="/Login" className="flex items-center">
+                  <Link to="/UserPage" className="flex items-center">
+                    <AllIcons name="users" />
+                    {state === "collapsed" ? "" : "User"}
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              {/* <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <Link to="/" className="flex items-center">
                     <AppWindow className="mr-2 h-4 w-4" />
                     {state === "collapsed" ? "" : "Login"}
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem> */}
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <Link to="/Signup" className="flex items-center">
+                    <AppWindow className="mr-2 h-4 w-4" />
+                    {state === "collapsed" ? "" : "Signup"}
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

@@ -9,7 +9,6 @@ import {
   TableBody,
   TableCell,
 } from "../components/ui/table";
-import { Badge } from "../components/ui/badge";
 import {
   MoreHorizontal,
   Plus,
@@ -22,7 +21,6 @@ import {
   Clock9,
   XCircle,
   CheckCircle,
-  AlertCircle,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -30,17 +28,17 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-
-import TaskData from "../Data/TaskData.json";
-
+import RoleIcon from "../components/SharedComponent/AllIcons"
+import UserData from "../Data/UserData.json";
+import {StatusBadge, StatusType} from "../components/SharedComponent/StatusBade"
 export default function TaskPage() {
   return (
-    <div className="w-full mx-auto  lg:pl-[1rem] flex flex-col gap-0 px-4  lg:pr-2 py-8 max-w-screen-2xl  bg-white dark:bg-zinc-800">
-      <div className="flex items-center justify-between mb-2  bg-white dark:bg-zinc-800">
+    <div className="w-full  lg:pl-[1rem] mx-auto flex flex-col gap-0 px-4 lg:pl-[0rem] lg:pr-2 py-8 max-w-screen-2xl bg-white dark:bg-zinc-800">
+      <div className="flex items-center justify-between mb-2">
         <div>
-          <h1 className="text-3xl font-bold">Tasks</h1>
+          <h1 className="text-3xl font-bold">User List</h1>
           <p className="text-muted-foreground text-sm mt-1">
-            Here's a list of your tasks for this month!
+          Manage your users and their roles here.
           </p>
         </div>
         <div className="flex gap-2">
@@ -57,7 +55,7 @@ export default function TaskPage() {
         </div>
       </div>
 
-      <div className="flex items-center gap-2  mb-4 bg-white dark:bg-zinc-800">
+      <div className="flex items-center gap-2 mb-4 bg-white dark:bg-zinc-800">
         <Input placeholder="Filter tasks..." className="max-w-xs" />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -115,65 +113,52 @@ export default function TaskPage() {
         </Button>
       </div>
 
-      <div className="rounded-lg border  bg-white dark:bg-zinc-800">
+      <div className="rounded-lg border bg-white dark:bg-zinc-800">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>
                 <Checkbox />
               </TableHead>
-              <TableHead>Task</TableHead>
-              <TableHead>Title</TableHead>
+              <TableHead>Username</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Contact No</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead>Priority</TableHead>
+              <TableHead>Role</TableHead>
               <TableHead></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {TaskData.map((task) => (
-              <TableRow key={task.id}>
+            {UserData.map((user, index) => (
+              <TableRow key={index}>
                 <TableCell>
                   <Checkbox />
                 </TableCell>
-                <TableCell className="font-medium">{task.id}</TableCell>
+                <TableCell className="font-medium">{user.username}</TableCell>
                 <TableCell>
-                  <Badge className="mr-2 bg-gray-100 text-gray-700 border border-gray-300">
-                    {task.tag}
-                  </Badge>
+                  {user.name}
+                </TableCell>
+                <TableCell>
+                    {user.email}
+                </TableCell>
+                <TableCell>
+                    {user.phone}
+                </TableCell>
+                <TableCell>
+                <StatusBadge
+  status={
+    (user.status.charAt(0).toUpperCase() + user.status.slice(1)) as StatusType
+  }
+/>
 
-                  {task.title}
-                </TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-1">
-                    {task.status === "In Progress" ? (
-                      <Clock9 className="w-4 h-4 text-blue-500" />
-                    ) : task.status === "Todo" ? (
-                      <Clock className="w-4 h-4 text-gray-500" />
-                    ) : task.status === "Canceled" ? (
-                      <XCircle className="w-4 h-4 text-red-500" />
-                    ) : task.status === "Done" ? (
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                    ) : task.status === "Backlog" ? (
-                      <AlertCircle className="w-4 h-4 text-yellow-500" />
-                    ) : (
-                      <Clock className="w-4 h-4 text-muted-foreground" />
-                    )}
-                    {task.status}
-                  </div>
-                </TableCell>
+</TableCell>
+<TableCell className="flex items-center gap-1">
+  <RoleIcon role={user.role} />
+  {user.role}
+</TableCell>
 
-                <TableCell>
-                  <div className="flex items-center gap-1">
-                    {task.priority==="Low"?(
-                        <ArrowDown className="w-4 h-4" />
-                    ):task.priority==="Medium" ?(
-                        <ArrowRight className="w-4 h-4" />
-                    ): task.priority==="High"? (
-                        <ArrowUp className="w-4 h-4" />
-                    ):null}
-                    {task.priority}
-                  </div>
-                </TableCell>
+            
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

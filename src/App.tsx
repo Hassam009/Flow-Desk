@@ -5,16 +5,30 @@ import './index.css';
 import TaskPage from "./pages/TaskPage";
 import LoginPage from "./pages/LoginPage";
 import AppPage from "./pages/AppPage";
+import UserPage from "./pages/UserPage";
+import SignupPage from "./pages/SignupPage";
 
 export default function App() {
   return (
-    <AppShell>
+    <>
       <Routes>
-     <Route path="/" element={<DashboardPage />} />
-       <Route path="/TaskPage" element={<TaskPage />} />
-        <Route path="/AppPage" element={<AppPage/>} />
-        <Route path="/Login" element={<LoginPage/>} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/Signup" element={<SignupPage />} />
+
+        <Route
+          path="/*"
+          element={
+            <AppShell>
+              <Routes>
+                <Route path="Dashboard" element={<DashboardPage />} />
+                <Route path="TaskPage" element={<TaskPage />} />
+                <Route path="AppPage" element={<AppPage />} />
+                <Route path="UserPage" element={<UserPage />} />
+              </Routes>
+            </AppShell>
+          }
+        />
       </Routes>
-    </AppShell>
+    </>
   );
 }
