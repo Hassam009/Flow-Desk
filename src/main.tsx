@@ -8,7 +8,7 @@ import './index.css'
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider attribute="class" defaultTheme="system" storageKey="vite-ui-theme">
+      <ThemeProvider attribute="class" defaultTheme="light" storageKey="vite-ui-theme">
         <App />
       </ThemeProvider>
     </BrowserRouter>
