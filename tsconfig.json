@@ -2,7 +2,9 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
+    "module": "ESNext",
+    "target": "ESNext",
     "skipLibCheck": true,    
     "jsx": "react-jsx",
     "jsxImportSource": "react",
