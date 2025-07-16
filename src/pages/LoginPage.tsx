@@ -22,7 +22,6 @@ export default function LoginPage() {
       (user) => user.email === email && user.password === password
     );
     if (foundUser) {
-      alert(`Welcome back, ${foundUser.email}`);
       navigate("/Dashboard");
     } else {
       alert("Invalid email or password");
@@ -76,23 +75,13 @@ export default function LoginPage() {
           >
             Login
           </Button>
-{/* 
-          <div className="flex items-center justify-center gap-2">
-        //     <Separator className="w-full" />
-        //     <span className="text-xs  bg-white dark:bg-zinc-800">OR CONTINUE WITH</span>
-        //     <Separator className="w-full" />
-        //   </div>
+          <Button
+  className="w-full bg-black text-white hover:bg-gray-900"
+  onClick={() => navigate("/signup")}
+>
+  Signup
+</Button>
 
-        //   <div className="flex gap-2">
-        //     <Button variant="outline" className="w-full">
-        //       <Github className="w-4 h-4 mr-2" />
-        //       GitHub
-        //     </Button>
-        //     <Button variant="outline" className="w-full">
-        //       <Facebook className="w-4 h-4 mr-2" />
-        //       Facebook
-        //     </Button>
-        //   </div> */}
         </CardContent>
 
         <CardFooter className="text-xs text-center text-gray-500 mt-4">
