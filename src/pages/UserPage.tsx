@@ -30,17 +30,31 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import RoleIcon from "../components/SharedComponent/AllIcons"
+import RoleIcon from "../components/SharedComponent/AllIcons";
 import UserData from "../Data/UserData.json";
-import {StatusBadge, StatusType} from "../components/SharedComponent/StatusBade"
+import {
+  StatusBadge,
+  StatusType,
+} from "../components/SharedComponent/StatusBade";
+import { use, useState } from "react";
 export default function TaskPage() {
+  const [statusFilter, setStatusFilter] = useState<string | null>(null);
+  const [roleFilter, setRoleFilter] = useState<string | null>(null);
+
+  const filteredUsers = UserData.filter((user) => {
+    const userMatch = statusFilter
+      ? user.status.toLowerCase() === statusFilter.toLowerCase()
+      : true;
+    const roleMatch = roleFilter ? user.role.toLowerCase() === roleFilter.toLowerCase() : true;
+    return userMatch && roleMatch;
+  });
   return (
-    <div className="w-full  lg:pl-[1rem] mx-auto flex flex-col gap-0 px-4 lg:pl-[0rem] lg:pr-2 py-8 max-w-screen-2xl bg-white dark:bg-zinc-800">
+    <div className="w-full mx-auto flex flex-col gap-0 px-4 py-8 max-w-screen-2xl bg-white dark:bg-zinc-800 min-h-screen ">
       <div className="flex items-center justify-between mb-2">
         <div>
           <h1 className="text-3xl font-bold">User List</h1>
           <p className="text-muted-foreground text-sm mt-1">
-          Manage your users and their roles here.
+            Manage your users and their roles here.
           </p>
         </div>
         <div className="flex gap-2">
@@ -59,7 +73,7 @@ export default function TaskPage() {
 
       <div className="flex items-center gap-2 mb-4 bg-white dark:bg-zinc-800">
         <Input placeholder="Filter users..." className="max-w-xs" />
-        {/* Status Dropdown */}
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="flex items-center gap-1">
@@ -71,21 +85,29 @@ export default function TaskPage() {
             align="start"
             className="bg-white border rounded-md shadow-md"
           >
-            <DropdownMenuItem>
-              <CheckCircle className="w-4 h-4 text-green-500" /> Active
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Ban className="w-4 h-4 text-red-500" /> Suspended
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <PauseCircle className="w-4 h-4 text-gray-400" /> Inactive
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Mail className="w-4 h-4 text-blue-500" /> Invited
-            </DropdownMenuItem>
+            {["Active", "Suspended", "Inactive", "Invited"].map((status) => (
+              <DropdownMenuItem
+                key={status}
+                onClick={() => setStatusFilter(status)}
+              >
+                {status === "Active" && (
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                )}
+                {status === "Suspended" && (
+                  <Ban className="w-4 h-4 text-red-500" />
+                )}
+                {status === "Inactive" && (
+                  <PauseCircle className="w-4 h-4 text-gray-400" />
+                )}
+                {status === "Invited" && (
+                  <Mail className="w-4 h-4 text-blue-500" />
+                )}
+                {status}
+              </DropdownMenuItem>
+            ))}
           </DropdownMenuContent>
         </DropdownMenu>
-        {/* Role Dropdown */}
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="flex items-center gap-1">
@@ -97,22 +119,37 @@ export default function TaskPage() {
             align="start"
             className="bg-white border rounded-md shadow-md"
           >
-            <DropdownMenuItem>
-              <Users className="w-4 h-4 text-purple-500" /> Manager
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <ShieldCheck className="w-4 h-4 text-blue-500" /> Admin
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <User className="w-4 h-4 text-gray-700" /> Cashier
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <ShieldCheck className="w-4 h-4 text-orange-500" /> Superadmin
-            </DropdownMenuItem>
+            {["Mangaer", "Admin", "Cashier", "Superadmin"].map((role) => (
+              <DropdownMenuItem key={role} onClick={() => setRoleFilter(role)}>
+                {role === "Manager" && (
+                  <Users className="w-4 h-4 text-purple-500" />
+                )}
+                {role === "Admin" && (
+                  <ShieldCheck className="w-4 h-4 text-blue-500" />
+                )}
+                {role === "Cashier" && (
+                  <User className="w-4 h-4 text-gray-700" />
+                )}
+                {role === "Superadmin" && (
+                  <ShieldCheck className="w-4 h-4 text-orange-500" />
+                )}
+                {role}
+              </DropdownMenuItem>
+            ))}
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button variant="outline" className="ml-auto">
+        {/* <Button variant="outline" className="ml-auto">
           <Filter className="w-4 h-4" />
+        </Button> */}
+        <Button
+        className="ml-auto "
+          variant="outline"
+          onClick={() => {
+            setStatusFilter(null);
+            setRoleFilter(null);
+          }}
+        >
+          Clear Filters
         </Button>
       </div>
 
@@ -133,35 +170,28 @@ export default function TaskPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {UserData.map((user, index) => (
+            {filteredUsers.map((user, index) => (
               <TableRow key={index}>
                 <TableCell>
                   <Checkbox />
                 </TableCell>
                 <TableCell className="font-medium">{user.username}</TableCell>
+                <TableCell>{user.name}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>{user.phone}</TableCell>
                 <TableCell>
-                  {user.name}
+                  <StatusBadge
+                    status={
+                      (user.status.charAt(0).toUpperCase() +
+                        user.status.slice(1)) as StatusType
+                    }
+                  />
                 </TableCell>
-                <TableCell>
-                    {user.email}
+                <TableCell className="flex items-center gap-1">
+                  <RoleIcon role={user.role} />
+                  {user.role}
                 </TableCell>
-                <TableCell>
-                    {user.phone}
-                </TableCell>
-                <TableCell>
-                <StatusBadge
-  status={
-    (user.status.charAt(0).toUpperCase() + user.status.slice(1)) as StatusType
-  }
-/>
 
-</TableCell>
-<TableCell className="flex items-center gap-1">
-  <RoleIcon role={user.role} />
-  {user.role}
-</TableCell>
-
-            
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -169,8 +199,7 @@ export default function TaskPage() {
                         <MoreHorizontal className="w-5 h-5" />
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                    </DropdownMenuContent>
+                    <DropdownMenuContent align="end"></DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>
               </TableRow>

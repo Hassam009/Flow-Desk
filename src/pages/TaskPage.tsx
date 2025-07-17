@@ -78,7 +78,8 @@ export default function TaskPage() {
               Status
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="start"  className="bg-white border border-gray-200 shadow-md">
+          <DropdownMenuContent align="start" 
+           className="bg-white border border-gray-200 shadow-md">
             {["Todo", "In Progress", "Done", "Canceled"].map((status) => (
               <DropdownMenuItem key={status} onClick={() => setStatusFilter(status)}>
                 {status === "Todo" && <Clock className="w-4 h-4 text-gray-500" />}
@@ -110,8 +111,18 @@ export default function TaskPage() {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Button variant="outline" className="ml-auto">
+        {/* <Button variant="outline" className="ml-auto">
           <Filter className="w-4 h-4" />
+        </Button> */}
+        <Button
+          variant="outline"
+          className="ml-auto"
+          onClick={() => {
+            setStatusFilter(null);
+            setPriorityFilter(null);
+          }}
+        >
+          Clear Filters
         </Button>
       </div>
 
