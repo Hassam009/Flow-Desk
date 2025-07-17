@@ -30,8 +30,8 @@ import {
     };
   
     return (
-      <div className="w-full p-0 pt-8  lg:pl-[1rem] bg-white dark:bg-zinc-800">
-        {/* SECTION 1: Header + Search + Dropdown */}
+      <div className="w-full p-12 pt-8  lg:pl-[1rem] bg-white dark:bg-zinc-800">
+        
         <div className="mb-6">
           <h1 className="text-3xl font-bold mb-1">App Integrations</h1>
           <p className="text-muted-foreground text-sm mb-4">

@@ -15,7 +15,7 @@ const typedTableData = TableData as unknown as Payment[]
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h1 className="text-3xl font-bold bg-white dark:bg-zinc-800">Dashboard</h1>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-4 flex flex-nowrap gap-1 overflow-x-auto">
               <button className="px-4 py-1 rounded-md bg-gray-200 text-gray-900 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500">Overview</button>
               <button className="px-4 py-1 rounded-md bg-white dark:bg-zinc-800 hover:bg-gray-100 font-medium">Analytics</button>
               <button className="px-4 py-1 rounded-md bg-white dark:bg-zinc-800 hover:bg-gray-100 font-medium">Reports</button>
