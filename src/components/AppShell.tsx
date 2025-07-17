@@ -12,7 +12,7 @@ function MainContent({ children }: { children?: React.ReactNode }) {
   if (!isMobile) {
     leftMargin = state === "collapsed" ? "50px" : "240px";
   }
-  // Remove overflow-y-auto only for chat page
+  
   const isChatPage = location.pathname.toLowerCase().includes("chat");
   return (
     <main

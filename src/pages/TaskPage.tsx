@@ -44,22 +44,22 @@ export default function TaskPage() {
   });
 
   return (
-    <div className="w-full mx-auto flex flex-col gap-0 px-4 py-8 max-w-screen-2xl bg-white dark:bg-zinc-800 min-h-screen">
+    <div className="w-full mx-auto flex flex-wrap flex-col gap-0 px-4 py-8 max-w-screen-2xl bg-white dark:bg-zinc-800 min-h-screen">
       
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2 w-full">
         <div>
           <h1 className="text-3xl font-bold">Tasks</h1>
           <p className="text-muted-foreground text-sm mt-1">
             Here's a list of your tasks for this month!
           </p>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline">
+        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+          <Button variant="outline" className="w-full sm:w-auto">
             <Download className="w-4 h-4 mr-2" /> Import
           </Button>
           <Button
             style={{ backgroundColor: "oklch(0.208 0.042 265.755)" }}
-            className="text-white hover:opacity-90"
+            className="text-white hover:opacity-90 w-full sm:w-auto"
           >
             Create
             <Plus className="w-4 h-4 mr-2" />
@@ -68,8 +68,8 @@ export default function TaskPage() {
       </div>
 
       
-      <div className="flex items-center gap-2 mb-4">
-        <Input placeholder="Filter tasks..." className="max-w-xs" />
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-4 w-full">
+        <Input placeholder="Filter tasks..." className="max-w-xs w-full sm:w-auto" />
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -111,12 +111,10 @@ export default function TaskPage() {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        {/* <Button variant="outline" className="ml-auto">
-          <Filter className="w-4 h-4" />
-        </Button> */}
+    
         <Button
           variant="outline"
-          className="ml-auto"
+          className="w-full sm:w-auto"
           onClick={() => {
             setStatusFilter(null);
             setPriorityFilter(null);
@@ -127,9 +125,8 @@ export default function TaskPage() {
       </div>
 
     
-      <div className="flex-1 flex flex-col">
-        <div className="rounded-lg border bg-white dark:bg-zinc-800 flex-1">
-          <Table>
+      <div className="w-full overflow-x-auto rounded-lg border bg-white dark:bg-zinc-800">
+        <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>
@@ -196,7 +193,6 @@ export default function TaskPage() {
             </TableBody>
           </Table>
         </div>
-      </div>
     </div>
   );
 }
