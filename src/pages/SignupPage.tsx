@@ -37,7 +37,7 @@ export default function SignupPage() {
     existingUsers.push(newUser);
     localStorage.setItem("users", JSON.stringify(existingUsers));
 
-    alert("Account created Successfully");
+    // alert("Account created Successfully");
     navigate("/")
   }
   return (
