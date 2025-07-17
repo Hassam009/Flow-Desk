@@ -8,6 +8,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   useSidebar,
+  SidebarTrigger,
 } from "../ui/sidebar";
 import { AppWindow } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
@@ -143,6 +144,7 @@ export default function CustomSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarTrigger className="md:hidden" />
     </Sidebar>
   );
 }

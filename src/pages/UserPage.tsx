@@ -138,9 +138,9 @@ export default function TaskPage() {
             ))}
           </DropdownMenuContent>
         </DropdownMenu>
-        {/* <Button variant="outline" className="ml-auto">
+        <Button variant="outline" className="ml-auto">
           <Filter className="w-4 h-4" />
-        </Button> */}
+        </Button>
         <Button
         className="ml-auto "
           variant="outline"

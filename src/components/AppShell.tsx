@@ -2,11 +2,16 @@ import CustomSidebar from "./SharedComponent/CustomSidebar";
 import CustomNav from "./SharedComponent/CustomNav";
 import { SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 import { useLocation } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 function MainContent({ children }: { children?: React.ReactNode }) {
   const { state } = useSidebar(); 
   const location = useLocation();
-  const leftMargin = state === "collapsed" ? "50px" : "240px";
+  const isMobile = useIsMobile();
+  let leftMargin = "0px";
+  if (!isMobile) {
+    leftMargin = state === "collapsed" ? "50px" : "240px";
+  }
   // Remove overflow-y-auto only for chat page
   const isChatPage = location.pathname.toLowerCase().includes("chat");
   return (
