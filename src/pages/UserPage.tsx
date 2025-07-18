@@ -62,8 +62,8 @@ export default function TaskPage() {
             <Download className="w-4 h-4 mr-2" /> Import
           </Button>
           <Button
-            style={{ backgroundColor: "oklch(0.208 0.042 265.755)" }}
-            className="text-white hover:opacity-90"
+       
+            className="text-white hover:opacity-90 bg-primary-custom"
           >
             Create
             <Plus className="w-4 h-4 mr-2" />

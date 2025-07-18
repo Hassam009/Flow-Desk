@@ -8,7 +8,7 @@ type Props = {
 
 export default function ChatSidebar({ conversations, onSelectChat }: Props) {
   return (
-    <div className="py-4 px-2 space-y-4 bg-white dark:bg-zinc-800">
+    <div className=" py-4 px-2 space-y-4 bg-white dark:bg-zinc-800">
       <h2 className="text-xl font-bold">Inbox</h2>
       <div className="sticky top-0 z-10 bg-white dark:bg-zinc-800 pb-2">
         <Input placeholder="Search chat..." />

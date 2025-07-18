@@ -27,7 +27,7 @@ export default function ChatWindow({ conversation }: Props) {
       }}
     >
       <div className="flex items-center justify-between p-4 border-b dark:border-zinc-700">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 ml-[45px] sm:ml-0">
           <img
             src={conversation.profile}
             className="w-10 h-10 rounded-full"

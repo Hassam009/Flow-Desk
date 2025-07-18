@@ -47,8 +47,7 @@ import {
             </DropdownMenu>
           </div>
         </div>
-  
-        {/* SECTION 2: Cards */}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4  bg-white dark:bg-zinc-800">
           {AppData?.map((card, index) => (
             <CustomCard key={index}>

@@ -5,6 +5,7 @@ import CustomChart from "../components/SharedComponent/CustomChart"
 import CardData from "../Data/CardData.json"
 import TableData from "../Data/TableData.json"
 import { Payment } from "@/components/SharedComponent/PaymentData"
+import { TabButton } from "@/components/SharedComponent/TabButton"
 
 export default function DashboardPage() {
   
@@ -16,14 +17,14 @@ const typedTableData = TableData as unknown as Payment[]
           <div>
             <h1 className="text-3xl font-bold bg-white dark:bg-zinc-800">Dashboard</h1>
             <div className="mt-4 flex flex-nowrap gap-1 overflow-x-auto">
-              <button className="px-4 py-1 rounded-md bg-gray-200 text-gray-900 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500">Overview</button>
-              <button className="px-4 py-1 rounded-md bg-white dark:bg-zinc-800 hover:bg-gray-100 font-medium">Analytics</button>
-              <button className="px-4 py-1 rounded-md bg-white dark:bg-zinc-800 hover:bg-gray-100 font-medium">Reports</button>
-              <button className="px-4 py-1 rounded-md bg-white dark:bg-zinc-800 hover:bg-gray-100 font-medium">Notifications</button>
+            <TabButton active>Overview</TabButton>
+            <TabButton>Analytics</TabButton>
+            <TabButton>Reports</TabButton>
+            <TabButton>Notifications</TabButton>
             </div>
           </div>
           <div className="flex justify-end w-full sm:w-auto">
-            <Button className="px-6 py-2 hover:bg-blue-700 text-white w-full sm:w-auto"  style={{ backgroundColor: "oklch(0.208 0.042 265.755)" }}>
+            <Button className="px-6 py-2 hover:bg-blue-700 text-white w-full sm:w-auto bg-primary-custom">
               Download
             </Button>
           </div>
