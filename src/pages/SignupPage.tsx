@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { Card, CardFooter, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { EyeOff, Eye } from "lucide-react"
@@ -12,9 +12,6 @@ import {signupSchema, SignupSchemaType } from "@/lib/schema/signupSchema";
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [email, setEmail]=useState("");
-  const [password, setPassword]=useState("");
-  const [confirmPassword, setConfirmPassword]=useState("");
   const navigate=useNavigate();
 
 const{
@@ -27,7 +24,7 @@ const{
 
 
 function handleSignup(data: SignupSchemaType) {
-  const { email, password, confirmPassword } = data;
+  const { email, password } = data;
   const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
 
   const userExists = existingUsers.some((user: any) => user.email === email);
