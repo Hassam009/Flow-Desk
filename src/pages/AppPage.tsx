@@ -9,15 +9,6 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
   } from "@/components/ui/dropdown-menu";
-import {
-    Plus,
-    Download,
-    Clock,
-    Clock9,
-    XCircle,
-    CheckCircle,
-    AlertCircle,
-  } from "lucide-react";
 
   export default function AppPage() {
     const getLogo = (name: string) => {
@@ -44,7 +35,7 @@ import {
             />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="w-full sm:w-auto">
+                <Button variant="outline"  className="w-full sm:w-auto bg-white border border-gray-300 text-gray-900 hover:bg-gray-100">
                   All Apps
                 </Button>
               </DropdownMenuTrigger>
@@ -59,7 +50,7 @@ import {
   
         {/* SECTION 2: Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4  bg-white dark:bg-zinc-800">
-          {AppData.map((card, index) => (
+          {AppData?.map((card, index) => (
             <CustomCard key={index}>
               <div className="pt-0 pb-2 pl-0 pr-0 h-full flex flex-col justify-between">
                 <div className="flex items-start justify-between mb-4">
