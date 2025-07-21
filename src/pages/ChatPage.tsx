@@ -54,7 +54,7 @@ export default function ChatPage() {
             </div>
           ) : (
             !isMobile && (
-              <div className="h-full flex flex-col items-center justify-center text-center text-gray-500">
+              <div className="h-full w-full flex flex-col items-center justify-center text-center text-gray-500">
                 <MessageCircle className="w-12 h-12 mb-4" />
                 <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2">
                   Your messages

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+// import { useAuth } from "@/context/AuthContext";
 
 import { loginSchema, LoginSchemaType } from "@/lib/schema/loginScheme";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { EyeOff, Eye } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,7 +23,7 @@ export default function LoginPage() {
   } = useForm<LoginSchemaType>({
     resolver: zodResolver(loginSchema),
   });
-
+const {login}=useAuth();
   const onSubmit = (data: LoginSchemaType) => {
     const users = JSON.parse(localStorage.getItem("users") || "[]");
 
@@ -31,6 +33,7 @@ export default function LoginPage() {
     );
 
     if (foundUser) {
+      login(foundUser, "mockToken123");
       navigate("/Dashboard");
     } else {
       alert("Invalid email or password");
