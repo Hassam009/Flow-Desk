@@ -34,11 +34,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import TaskData from "../Data/TaskData.json";
 import { FilterBar } from "@/components/SharedComponent/FilterBar";
-
+import { useFilter } from "@/context/FilterContext";
 export default function TaskPage() {
-  const [statusFilter, setStatusFilter] = useState<string | null>(null);
-  const [priorityFilter, setPriorityFilter] = useState<string | null>(null);
-
+  const { statusFilter, priorityFilter, setStatusFilter, setPriorityFilter } = useFilter();
   const filteredTasks = TaskData.filter((task) => {
     const statusMatch = statusFilter ? task.status === statusFilter : true;
     const priorityMatch = priorityFilter
@@ -48,7 +46,7 @@ export default function TaskPage() {
   });
 
   return (
-    <div className="w-full mx-auto flex flex-wrap flex-col gap-0 px-4 py-8 max-w-screen-2xl bg-white dark:bg-zinc-800 min-h-screen">
+    <div className="w-full flex flex-wrap flex-col gap-0 px-4 py-8 bg-white dark:bg-zinc-800 min-h-screen">
       <PageHeader
         title="Tasks"
         subtitle="Here's a list of your tasks for this month!"

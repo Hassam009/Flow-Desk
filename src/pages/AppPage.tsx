@@ -53,7 +53,7 @@ import {
             <CustomCard key={index}>
               <div className="pt-0 pb-2 pl-0 pr-0 h-full flex flex-col justify-between">
                 <div className="flex items-start justify-between mb-4">
-                  <div className="bg-gray-100 rounded-full p-1 flex items-center justify-center">
+                  <div className="bg-white dark:bg-zinc-800 rounded-full p-1 flex items-center justify-center">
                     {getLogo(card.name)}
                   </div>
                   <button

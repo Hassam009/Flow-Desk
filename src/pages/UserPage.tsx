@@ -36,11 +36,10 @@ import {
   StatusBadge,
   StatusType,
 } from "../components/SharedComponent/StatusBade";
-import { use, useState } from "react";
+import { useFilter } from "@/context/FilterContext";
 export default function TaskPage() {
-  const [statusFilter, setStatusFilter] = useState<string | null>(null);
-  const [roleFilter, setRoleFilter] = useState<string | null>(null);
-
+  const Roles=["Manager", "Admin", "Cashier", "Superadmin"];
+  const { statusFilter, roleFilter, setStatusFilter, setRoleFilter } = useFilter();
   const filteredUsers = UserData.filter((user) => {
     const userMatch = statusFilter
       ? user.status.toLowerCase() === statusFilter.toLowerCase()
@@ -49,8 +48,8 @@ export default function TaskPage() {
     return userMatch && roleMatch;
   });
   return (
-    <div className="w-full mx-auto flex flex-col gap-0 px-4 py-8 max-w-screen-2xl bg-white dark:bg-zinc-800 min-h-screen ">
-      <div className="flex items-center justify-between mb-2">
+    <div className="w-full flex flex-col gap-0 px-4 py-8 bg-white dark:bg-zinc-800 min-h-screen ">
+      <div className="w-full flex items-center justify-between mb-2">
         <div>
           <h1 className="text-3xl font-bold">User List</h1>
           <p className="text-muted-foreground text-sm mt-1">
@@ -119,7 +118,7 @@ export default function TaskPage() {
             align="start"
             className="bg-white border rounded-md shadow-md"
           >
-            {["Mangaer", "Admin", "Cashier", "Superadmin"].map((role) => (
+            {Roles.map((role) => (
               <DropdownMenuItem key={role} onClick={() => setRoleFilter(role)}>
                 {role === "Manager" && (
                   <Users className="w-4 h-4 text-purple-500" />
