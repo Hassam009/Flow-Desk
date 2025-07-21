@@ -39,10 +39,10 @@ import {
 import { useFilter } from "@/context/FilterContext";
 export default function TaskPage() {
   const Roles=["Manager", "Admin", "Cashier", "Superadmin"];
-  const { statusFilter, roleFilter, setStatusFilter, setRoleFilter } = useFilter();
+  const { UserstatusFilter, roleFilter, setUserStatusFilter, setRoleFilter } = useFilter();
   const filteredUsers = UserData.filter((user) => {
-    const userMatch = statusFilter
-      ? user.status.toLowerCase() === statusFilter.toLowerCase()
+    const userMatch = UserstatusFilter
+      ? user.status.toLowerCase() === UserstatusFilter.toLowerCase()
       : true;
     const roleMatch = roleFilter ? user.role.toLowerCase() === roleFilter.toLowerCase() : true;
     return userMatch && roleMatch;
@@ -87,7 +87,7 @@ export default function TaskPage() {
             {["Active", "Suspended", "Inactive", "Invited"].map((status) => (
               <DropdownMenuItem
                 key={status}
-                onClick={() => setStatusFilter(status)}
+                onClick={() => setUserStatusFilter(status)}
               >
                 {status === "Active" && (
                   <CheckCircle className="w-4 h-4 text-green-500" />
@@ -142,7 +142,7 @@ export default function TaskPage() {
       
           variant="outline"
           onClick={() => {
-            setStatusFilter(null);
+            setUserStatusFilter(null);
             setRoleFilter(null);
           }}
         >

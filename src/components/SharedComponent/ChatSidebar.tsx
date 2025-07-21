@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { Conversation } from "../SharedComponent/Types"; // adjust if needed
+import { Conversation } from "../SharedComponent/Types"; 
 
 type Props = {
   conversations: Conversation[];

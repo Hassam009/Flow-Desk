@@ -14,10 +14,13 @@ import { AppWindow } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import AllIcons from "./AllIcons";
-
+import {useAuth} from "../../context/AuthContext"
+import { useNavigate } from "react-router-dom";
 export default function CustomSidebar() {
   const { state } = useSidebar();
   const location = useLocation();
+  const Navigate=useNavigate();
+  const {logout}=useAuth();
   return (
     <Sidebar
       collapsible="icon"
@@ -125,20 +128,25 @@ export default function CustomSidebar() {
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild className={cn(
-                      "flex items-center px-3 py-2 rounded-md w-full transition-colors",
-                      location.pathname === "/"
-                      ? "bg-sky-200 text-sky-800 dark:bg-sky-800 dark:text-white"
-  : "hover:bg-sky-100 hover:text-sky-700 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
-                    )}>
-                  <Link
-                    to="/"
-                    
-                  >
-                    <AppWindow className="mr-2 h-4 w-4" />
-                    {state === "collapsed" ? "" : "Logout"}
-                  </Link>
-                </SidebarMenuButton>
+
+<SidebarMenuButton asChild>
+  <button
+    onClick={() => {
+      logout();
+      Navigate("/");
+    }}
+    className={cn(
+      "flex items-center px-3 py-2 rounded-md w-full transition-colors",
+      location.pathname === "/"
+        ? "bg-sky-200 text-sky-800 dark:bg-sky-800 dark:text-white"
+        : "hover:bg-sky-100 hover:text-sky-700 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+    )}
+  >
+    <AppWindow className="mr-2 h-4 w-4" />
+    {state === "collapsed" ? "" : "Logout"}
+  </button>
+</SidebarMenuButton>
+
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>

@@ -1,6 +1,4 @@
-import { useState } from "react";
 import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
 import { Checkbox } from "../components/ui/checkbox";
 import { PageHeader } from "@/components/SharedComponent/PageHeader";
 import {
@@ -14,9 +12,6 @@ import {
 import { Badge } from "../components/ui/badge";
 import {
   MoreHorizontal,
-  Plus,
-  Download,
-  Filter,
   ArrowRight,
   ArrowDown,
   ArrowUp,
@@ -30,15 +25,14 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
-  DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import TaskData from "../Data/TaskData.json";
 import { FilterBar } from "@/components/SharedComponent/FilterBar";
 import { useFilter } from "@/context/FilterContext";
 export default function TaskPage() {
-  const { statusFilter, priorityFilter, setStatusFilter, setPriorityFilter } = useFilter();
+  const { TaskstatusFilter, priorityFilter, setTaskStatusFilter, setPriorityFilter } = useFilter();
   const filteredTasks = TaskData.filter((task) => {
-    const statusMatch = statusFilter ? task.status === statusFilter : true;
+    const statusMatch = TaskstatusFilter ? task.status === TaskstatusFilter : true;
     const priorityMatch = priorityFilter
       ? task.priority === priorityFilter
       : true;
@@ -58,13 +52,13 @@ export default function TaskPage() {
 <FilterBar
   placeholder="Filter tasks..."
   onClear={() => {
-    setStatusFilter(null)
+    setTaskStatusFilter(null)
     setPriorityFilter(null)
   }}
   filterConfigs={[
     {
       label: "Status",
-      onSelect: setStatusFilter,
+      onSelect: setTaskStatusFilter,
       items: [
         { label: "Todo", icon: <Clock className="w-4 h-4 text-gray-500" /> },
         { label: "In Progress", icon: <Clock9 className="w-4 h-4 text-blue-500" /> },

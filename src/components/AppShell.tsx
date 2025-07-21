@@ -3,6 +3,7 @@ import CustomNav from "./SharedComponent/CustomNav";
 import { SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 import { useLocation } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Outlet } from "react-router-dom";
 
 function MainContent({ children }: { children?: React.ReactNode }) {
   const { state } = useSidebar(); 
@@ -19,7 +20,7 @@ function MainContent({ children }: { children?: React.ReactNode }) {
       className={`flex-1 min-h-0 flex flex-col min-h-screen transition-all duration-300 bg-white dark:bg-zinc-800 ${isChatPage ? "overflow-hidden" : "overflow-y-auto"}`}
       style={{ marginLeft: leftMargin }}
     >
-      {children}
+     <Outlet />
     </main>
   );
 }

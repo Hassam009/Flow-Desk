@@ -8,7 +8,6 @@ interface PrivateRouteProps {
 
 export default function PrivateRoute({ children }: PrivateRouteProps) {
   const { isLoggedIn, loading } = useAuth();
-
   if (loading) {
     return <div className="text-center p-10">Loading...</div>;
   }
