@@ -4,7 +4,7 @@
       "name": "Carolyne Kiehn",
       "email": "carolyne4@hotmail.com",
       "phone": "+13559828779",
-      "status": "active",
+      "UserStatus": "active",
       "role": "manager"
     },
     {
@@ -12,7 +12,7 @@
       "name": "Clint Roob",
       "email": "clint56@yahoo.com",
       "phone": "+12824612511",
-      "status": "suspended",
+      "UserStatus": "suspended",
       "role": "admin"
     },
     {
@@ -20,7 +20,7 @@
       "name": "Vito Morissette",
       "email": "vito_gislason@hotmail.com",
       "phone": "+13985924592",
-      "status": "inactive",
+      "UserStatus": "inactive",
       "role": "manager"
     },
     {
@@ -28,7 +28,7 @@
       "name": "Izabella Howell",
       "email": "izabella_wehner82@yahoo.com",
       "phone": "+12857419415",
-      "status": "invited",
+      "UserStatus": "invited",
       "role": "cashier"
     },
     {
@@ -36,7 +36,7 @@
       "name": "Hailey Dibbert",
       "email": "hailey.keeling@yahoo.com",
       "phone": "+16974606351",
-      "status": "suspended",
+      "UserStatus": "suspended",
       "role": "cashier"
     },
     {
@@ -44,7 +44,7 @@
       "name": "Avis Mueller",
       "email": "avis.dietrich24@gmail.com",
       "phone": "+17226569055",
-      "status": "invited",
+      "UserStatus": "invited",
       "role": "admin"
     },
     {
@@ -52,7 +52,7 @@
       "name": "Florence Tremblay",
       "email": "florence.heathcote-gorczany91@gmail.com",
       "phone": "+17146739021",
-      "status": "suspended",
+      "UserStatus": "suspended",
       "role": "admin"
     },
     {
@@ -60,7 +60,7 @@
       "name": "Christy Nikolaus",
       "email": "christy51@hotmail.com",
       "phone": "+18883102504",
-      "status": "inactive",
+      "UserStatus": "inactive",
       "role": "admin"
     },
     {
@@ -68,7 +68,7 @@
       "name": "Brenda King",
       "email": "brenda53@gmail.com",
       "phone": "+14346556453",
-      "status": "inactive",
+      "UserStatus": "inactive",
       "role": "superadmin"
     },
     {
@@ -76,7 +76,7 @@
       "name": "Michele Stracke",
       "email": "michele.zulauf@hotmail.com",
       "phone": "+15913732558",
-      "status": "suspended",
+      "UserStatus": "suspended",
       "role": "manager"
     }
   ]

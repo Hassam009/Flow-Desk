@@ -24,7 +24,7 @@ const{
 
 
 function handleSignup(data: SignupSchemaType) {
-  const { email, password } = data;
+  const {email, password } = data;
   const existingUsers = JSON.parse(localStorage.getItem("users") || "[]");
 
   const userExists = existingUsers.some((user: any) => user.email === email);
@@ -32,8 +32,13 @@ function handleSignup(data: SignupSchemaType) {
     alert("User already exists");
     return;
   }
-
-  const newUser = { email, password };
+  function generateIncrementalId(): string {
+    const current = localStorage.getItem("lastUserId");
+    const nextId = current ? parseInt(current) + 1 : 1;
+    localStorage.setItem("lastUserId", nextId.toString());
+    return nextId.toString();
+  }
+  const newUser = { id: generateIncrementalId(), email, password };
   existingUsers.push(newUser);
   localStorage.setItem("users", JSON.stringify(existingUsers));
   navigate("/");

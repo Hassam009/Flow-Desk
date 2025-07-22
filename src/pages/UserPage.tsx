@@ -42,7 +42,7 @@ export default function TaskPage() {
   const { UserstatusFilter, roleFilter, setUserStatusFilter, setRoleFilter } = useFilter();
   const filteredUsers = UserData.filter((user) => {
     const userMatch = UserstatusFilter
-      ? user.status.toLowerCase() === UserstatusFilter.toLowerCase()
+      ? user.UserStatus.toLowerCase() === UserstatusFilter.toLowerCase()
       : true;
     const roleMatch = roleFilter ? user.role.toLowerCase() === roleFilter.toLowerCase() : true;
     return userMatch && roleMatch;
@@ -179,8 +179,8 @@ export default function TaskPage() {
                 <TableCell>
                   <StatusBadge
                     status={
-                      (user.status.charAt(0).toUpperCase() +
-                        user.status.slice(1)) as StatusType
+                      (user.UserStatus.charAt(0).toUpperCase() +
+                        user.UserStatus.slice(1)) as StatusType
                     }
                   />
                 </TableCell>

@@ -32,7 +32,7 @@ import { useFilter } from "@/context/FilterContext";
 export default function TaskPage() {
   const { TaskstatusFilter, priorityFilter, setTaskStatusFilter, setPriorityFilter } = useFilter();
   const filteredTasks = TaskData.filter((task) => {
-    const statusMatch = TaskstatusFilter ? task.status === TaskstatusFilter : true;
+    const statusMatch = TaskstatusFilter ? task.Taskstatus === TaskstatusFilter : true;
     const priorityMatch = priorityFilter
       ? task.priority === priorityFilter
       : true;
@@ -109,20 +109,20 @@ export default function TaskPage() {
                 </TableCell>
                 <TableCell>
                   <div className="flex items-center gap-1">
-                    {task.status === "In Progress" ? (
+                    {task.Taskstatus === "In Progress" ? (
                       <Clock9 className="w-4 h-4 text-blue-500" />
-                    ) : task.status === "Todo" ? (
+                    ) : task.Taskstatus === "Todo" ? (
                       <Clock className="w-4 h-4 text-gray-500" />
-                    ) : task.status === "Canceled" ? (
+                    ) : task.Taskstatus === "Canceled" ? (
                       <XCircle className="w-4 h-4 text-red-500" />
-                    ) : task.status === "Done" ? (
+                    ) : task.Taskstatus === "Done" ? (
                       <CheckCircle className="w-4 h-4 text-green-500" />
-                    ) : task.status === "Backlog" ? (
+                    ) : task.Taskstatus === "Backlog" ? (
                       <AlertCircle className="w-4 h-4 text-yellow-500" />
                     ) : (
                       <Clock className="w-4 h-4 text-muted-foreground" />
                     )}
-                    {task.status}
+                    {task.Taskstatus}
                   </div>
                 </TableCell>
                 <TableCell>
