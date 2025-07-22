@@ -8,14 +8,15 @@ interface FilterContextType {
   selectedLabels: { [key: string]: string };
   setSelectedLabel: (labelKey: string, value: string) => void;
   resetSelectedLabels: () => void;
+  resetAllFilters: () => void;
   setTaskStatusFilter: (val: string | null) => void;
   setUserStatusFilter: (val: string | null) => void;
   setPriorityFilter: (val: string | null) => void;
   setRoleFilter: (val: string | null) => void;
 }
 
-const defaultLabels = {
-  Taskstatus: "Task Status",
+export const defaultLabels = {
+  Taskstatus: "Status",
   priority: "Priority",
   role: "Role",
   Userstatus: "User Status",
@@ -39,6 +40,14 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
     setSelectedLabels(defaultLabels);
     localStorage.setItem("selectedLabels", JSON.stringify(defaultLabels));
   };
+  const resetAllFilters = () => {
+    resetSelectedLabels();
+    setTaskStatusFilter(null);
+    setUserStatusFilter(null);
+    setPriorityFilter(null);
+    setRoleFilter(null);
+  };
+  
 
   const [TaskstatusFilter, setTaskStatusFilterState] = useState<string | null>(() =>
     localStorage.getItem("TaskstatusFilter")
@@ -82,6 +91,7 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
         priorityFilter,
         roleFilter,
         selectedLabels,
+        resetAllFilters,
         setSelectedLabel,
         resetSelectedLabels,
         setTaskStatusFilter,

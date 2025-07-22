@@ -9,6 +9,7 @@ import {
   TableBody,
   TableCell,
 } from "../components/ui/table";
+import {defaultLabels}  from "../context/FilterContext";
 import { Badge } from "../components/ui/badge";
 import {
   MoreHorizontal,
@@ -29,11 +30,13 @@ import {
 import TaskData from "../Data/TaskData.json";
 import { FilterBar } from "@/components/SharedComponent/FilterBar";
 import { useFilter } from "@/context/FilterContext";
+import { JSX } from "react";
 export default function TaskPage() {
   const {
     setTaskStatusFilter,
     setPriorityFilter,
     resetSelectedLabels,
+    resetAllFilters,
     TaskstatusFilter, 
     priorityFilter,
   } = useFilter();
@@ -43,8 +46,18 @@ export default function TaskPage() {
     const priorityMatch = priorityFilter ? task.priority === priorityFilter : true;
     return statusMatch && priorityMatch;
   });
-  
-
+  const statusIcons: Record<string, JSX.Element> = {
+    "In Progress": <Clock9 className="w-4 h-4 text-blue-500" />,
+    "Todo": <Clock className="w-4 h-4 text-gray-500" />,
+    "Canceled": <XCircle className="w-4 h-4 text-red-500" />,
+    "Done": <CheckCircle className="w-4 h-4 text-green-500" />,
+    "Backlog": <AlertCircle className="w-4 h-4 text-yellow-500" />,
+  }
+  const priorityIcons: Record<string, JSX.Element> = {
+    Low: <ArrowDown className="w-4 h-4" />,
+    Medium: <ArrowRight className="w-4 h-4" />,
+    High: <ArrowUp className="w-4 h-4" />,
+  };
   return (
     <div className="w-full flex flex-wrap flex-col gap-0 px-4 py-8 bg-white dark:bg-zinc-800 min-h-screen">
       <PageHeader
@@ -56,13 +69,11 @@ export default function TaskPage() {
 <FilterBar
   placeholder="Filter tasks..."
   onClear={() => {
-  setTaskStatusFilter(null);
-  setPriorityFilter(null);
-  resetSelectedLabels();
+    resetAllFilters();
   }}
   filterConfigs={[
     {
-      key: "status",
+      key: defaultLabels.Taskstatus,
       label: "Status", 
       onSelect: setTaskStatusFilter,
       items: [
@@ -115,36 +126,16 @@ export default function TaskPage() {
                   {task.title}
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-1">
-                    {task.Taskstatus === "In Progress" ? (
-                      <Clock9 className="w-4 h-4 text-blue-500" />
-                    ) : task.Taskstatus === "Todo" ? (
-                      <Clock className="w-4 h-4 text-gray-500" />
-                    ) : task.Taskstatus === "Canceled" ? (
-                      <XCircle className="w-4 h-4 text-red-500" />
-                    ) : task.Taskstatus === "Done" ? (
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                    ) : task.Taskstatus === "Backlog" ? (
-                      <AlertCircle className="w-4 h-4 text-yellow-500" />
-                    ) : (
-                      <Clock className="w-4 h-4 text-muted-foreground" />
-                    )}
-                    {task.Taskstatus}
-                  </div>
+                <div className="flex items-center gap-1">
+    {statusIcons[task.Taskstatus] ?? <Clock className="w-4 h-4 text-muted-foreground" />}
+    {task.Taskstatus}
+  </div>
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-1">
-                    {task.priority === "Low" && (
-                      <ArrowDown className="w-4 h-4" />
-                    )}
-                    {task.priority === "Medium" && (
-                      <ArrowRight className="w-4 h-4" />
-                    )}
-                    {task.priority === "High" && (
-                      <ArrowUp className="w-4 h-4" />
-                    )}
-                    {task.priority}
-                  </div>
+                <div className="flex items-center gap-1">
+    {priorityIcons[task.priority]}
+    {task.priority}
+  </div>
                 </TableCell>
                 <TableCell>
                   <DropdownMenu>
