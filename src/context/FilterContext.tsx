@@ -4,34 +4,42 @@ interface FilterContextType {
   TaskstatusFilter: string | null;
   UserstatusFilter: string | null;
   priorityFilter: string | null;
-  roleFilter:string |null;
+  roleFilter: string | null;
   selectedLabels: { [key: string]: string };
   setSelectedLabel: (labelKey: string, value: string) => void;
+  resetSelectedLabels: () => void;
   setTaskStatusFilter: (val: string | null) => void;
   setUserStatusFilter: (val: string | null) => void;
   setPriorityFilter: (val: string | null) => void;
-  setRoleFilter:(val:string | null)=>void; 
+  setRoleFilter: (val: string | null) => void;
 }
+
+const defaultLabels = {
+  Taskstatus: "Task Status",
+  priority: "Priority",
+  role: "Role",
+  Userstatus: "User Status",
+};
 
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
 
-
 export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
-    const [selectedLabels, setSelectedLabels] = useState<{ [key: string]: string }>(() => {
-        const stored = localStorage.getItem("selectedLabels");
-        return stored ? JSON.parse(stored) : {
-          Status: "Status",
-          Priority: "Priority",
-          Role: "Role",
-        };
-      });
-      
-      const setSelectedLabel = (labelKey: string, value: string) => {
-        const updated = { ...selectedLabels, [labelKey]: value };
-        setSelectedLabels(updated);
-        localStorage.setItem("selectedLabels", JSON.stringify(updated));
-      };
-      
+  const [selectedLabels, setSelectedLabels] = useState<{ [key: string]: string }>(() => {
+    const stored = localStorage.getItem("selectedLabels");
+    return stored ? JSON.parse(stored) : defaultLabels;
+  });
+
+  const setSelectedLabel = (labelKey: string, value: string) => {
+    const updated = { ...selectedLabels, [labelKey]: value };
+    setSelectedLabels(updated);
+    localStorage.setItem("selectedLabels", JSON.stringify(updated));
+  };
+
+  const resetSelectedLabels = () => {
+    setSelectedLabels(defaultLabels);
+    localStorage.setItem("selectedLabels", JSON.stringify(defaultLabels));
+  };
+
   const [TaskstatusFilter, setTaskStatusFilterState] = useState<string | null>(() =>
     localStorage.getItem("TaskstatusFilter")
   );
@@ -48,6 +56,7 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     localStorage.setItem("TaskstatusFilter", TaskstatusFilter ?? "");
   }, [TaskstatusFilter]);
+
   useEffect(() => {
     localStorage.setItem("UserstatusFilter", UserstatusFilter ?? "");
   }, [UserstatusFilter]);
@@ -67,7 +76,19 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <FilterContext.Provider
-      value={{ TaskstatusFilter,UserstatusFilter, priorityFilter,roleFilter,selectedLabels,setUserStatusFilter, setSelectedLabel,setRoleFilter, setTaskStatusFilter, setPriorityFilter }}
+      value={{
+        TaskstatusFilter,
+        UserstatusFilter,
+        priorityFilter,
+        roleFilter,
+        selectedLabels,
+        setSelectedLabel,
+        resetSelectedLabels,
+        setTaskStatusFilter,
+        setUserStatusFilter,
+        setPriorityFilter,
+        setRoleFilter,
+      }}
     >
       {children}
     </FilterContext.Provider>

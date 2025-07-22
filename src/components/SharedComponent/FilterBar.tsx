@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FilterDropdown } from "./FilterDropdown";
-import { ReactNode, useEffect, useState } from "react";
-
+import { ReactNode } from "react";
+import {useFilter} from "../../context/FilterContext"
 interface FilterConfig {
+  key: string;
   label: string;
   items: {
     label: string;
@@ -18,53 +19,37 @@ interface FilterBarProps {
   onClear: () => void;
 }
 
-const STORAGE_KEY = "task_filters";
 
 export function FilterBar({ placeholder, filterConfigs, onClear }: FilterBarProps) {
-  const defaultLabels = Object.fromEntries(filterConfigs.map(f => [f.label, f.label]));
+  const defaultLabels = Object.fromEntries(filterConfigs.map(f => [f.key, f.label]));
 
-  const [selectedLabels, setSelectedLabels] = useState<{ [key: string]: string }>(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      try {
-        return JSON.parse(stored);
-      } catch {
-        return defaultLabels;
-      }
-    }
-    return defaultLabels;
-  });
+  const { selectedLabels, setSelectedLabel } = useFilter();
 
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(selectedLabels));
-  }, [selectedLabels]);
 
-  const handleSelect = (filterLabel: string, selected: string) => {
-    setSelectedLabels(prev => {
-      const updated = { ...prev, [filterLabel]: selected };
-      return updated;
-    });
-
-    const filter = filterConfigs.find(f => f.label === filterLabel);
+  const handleSelect = (filterKey: string, selected: string) => {
+    setSelectedLabel(filterKey, selected);
+    const filter = filterConfigs.find(f => f.key === filterKey);
     filter?.onSelect(selected);
   };
+  
 
   const handleClear = () => {
-    setSelectedLabels(defaultLabels);
-    localStorage.removeItem(STORAGE_KEY);
+    Object.entries(defaultLabels).forEach(([key, label]) => {
+      setSelectedLabel(key, label);
+    });
     onClear();
   };
-
+  
   return (
     <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-4 w-full">
       <Input placeholder={placeholder} className="max-w-xs w-full sm:w-auto" />
 
       {filterConfigs.map(filter => (
         <FilterDropdown
-          key={filter.label}
-          label={selectedLabels[filter.label]}
+          key={filter.key}
+          label={selectedLabels[filter.key] ?? filter.label}
           items={filter.items}
-          onSelect={selected => handleSelect(filter.label, selected)}
+          onSelect={selected => handleSelect(filter.key, selected)}
         />
       ))}
 

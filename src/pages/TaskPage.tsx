@@ -30,34 +30,40 @@ import TaskData from "../Data/TaskData.json";
 import { FilterBar } from "@/components/SharedComponent/FilterBar";
 import { useFilter } from "@/context/FilterContext";
 export default function TaskPage() {
-  const { TaskstatusFilter, priorityFilter, setTaskStatusFilter, setPriorityFilter } = useFilter();
+  const {
+    setTaskStatusFilter,
+    setPriorityFilter,
+    resetSelectedLabels,
+    TaskstatusFilter, 
+    priorityFilter,
+  } = useFilter();
+
   const filteredTasks = TaskData.filter((task) => {
     const statusMatch = TaskstatusFilter ? task.Taskstatus === TaskstatusFilter : true;
-    const priorityMatch = priorityFilter
-      ? task.priority === priorityFilter
-      : true;
+    const priorityMatch = priorityFilter ? task.priority === priorityFilter : true;
     return statusMatch && priorityMatch;
   });
+  
 
   return (
     <div className="w-full flex flex-wrap flex-col gap-0 px-4 py-8 bg-white dark:bg-zinc-800 min-h-screen">
       <PageHeader
         title="Tasks"
         subtitle="Here's a list of your tasks for this month!"
-        // onCreate={handleCreateTask}
-        // onImport={handleImportTasks}
       />
 
       <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-4 w-full">
 <FilterBar
   placeholder="Filter tasks..."
   onClear={() => {
-    setTaskStatusFilter(null)
-    setPriorityFilter(null)
+  setTaskStatusFilter(null);
+  setPriorityFilter(null);
+  resetSelectedLabels();
   }}
   filterConfigs={[
     {
-      label: "Status",
+      key: "status",
+      label: "Status", 
       onSelect: setTaskStatusFilter,
       items: [
         { label: "Todo", icon: <Clock className="w-4 h-4 text-gray-500" /> },
@@ -67,6 +73,7 @@ export default function TaskPage() {
       ],
     },
     {
+      key: "priority",
       label: "Priority",
       onSelect: setPriorityFilter,
       items: [
