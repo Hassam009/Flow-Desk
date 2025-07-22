@@ -32,18 +32,12 @@ import { FilterBar } from "@/components/SharedComponent/FilterBar";
 import { useFilter } from "@/context/FilterContext";
 import { JSX } from "react";
 export default function TaskPage() {
-  const {
-    setTaskStatusFilter,
-    setPriorityFilter,
-    resetSelectedLabels,
-    resetAllFilters,
-    TaskstatusFilter, 
-    priorityFilter,
-  } = useFilter();
+
+  const { filters, resetAllFilters, setFilter } = useFilter();
 
   const filteredTasks = TaskData.filter((task) => {
-    const statusMatch = TaskstatusFilter ? task.Taskstatus === TaskstatusFilter : true;
-    const priorityMatch = priorityFilter ? task.priority === priorityFilter : true;
+    const statusMatch = filters.Taskstatus ? task.Taskstatus === filters.Taskstatus : true;
+    const priorityMatch = filters.priority ? task.priority === filters.priority : true;
     return statusMatch && priorityMatch;
   });
   const statusIcons: Record<string, JSX.Element> = {
@@ -73,9 +67,9 @@ export default function TaskPage() {
   }}
   filterConfigs={[
     {
-      key: defaultLabels.Taskstatus,
+      key: "Taskstatus",
       label: "Status", 
-      onSelect: setTaskStatusFilter,
+      onSelect: (val) => setFilter("Taskstatus", val),
       items: [
         { label: "Todo", icon: <Clock className="w-4 h-4 text-gray-500" /> },
         { label: "In Progress", icon: <Clock9 className="w-4 h-4 text-blue-500" /> },
@@ -86,7 +80,7 @@ export default function TaskPage() {
     {
       key: "priority",
       label: "Priority",
-      onSelect: setPriorityFilter,
+      onSelect: (val) => setFilter("priority", val),
       items: [
         { label: "High", icon: <ArrowUp className="w-4 h-4" /> },
         { label: "Medium", icon: <ArrowRight className="w-4 h-4" /> },

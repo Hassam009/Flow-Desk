@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FilterDropdown } from "./FilterDropdown";
 import { ReactNode } from "react";
-import {useFilter} from "../../context/FilterContext"
+import { useFilter } from "../../context/FilterContext";
 interface FilterConfig {
   key: string;
   label: string;
@@ -19,41 +19,42 @@ interface FilterBarProps {
   onClear: () => void;
 }
 
-
-export function FilterBar({ placeholder, filterConfigs, onClear }: FilterBarProps) {
-  const defaultLabels = Object.fromEntries(filterConfigs.map(f => [f.key, f.label]));
-
-  const { selectedLabels, setSelectedLabel } = useFilter();
-
+export function FilterBar({
+  placeholder,
+  filterConfigs,
+  onClear,
+}: FilterBarProps) {
+  const { selectedLabels, setSelectedLabel, resetAllFilters } = useFilter();
 
   const handleSelect = (filterKey: string, selected: string) => {
     setSelectedLabel(filterKey, selected);
-    const filter = filterConfigs.find(f => f.key === filterKey);
+    const filter = filterConfigs.find((f) => f.key === filterKey);
     filter?.onSelect(selected);
   };
-  
 
   const handleClear = () => {
-    Object.entries(defaultLabels).forEach(([key, label]) => {
-      setSelectedLabel(key, label);
-    });
+    resetAllFilters();
     onClear();
   };
-  
+
   return (
     <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-4 w-full">
       <Input placeholder={placeholder} className="max-w-xs w-full sm:w-auto" />
 
-      {filterConfigs.map(filter => (
+      {filterConfigs.map((filter) => (
         <FilterDropdown
           key={filter.key}
           label={selectedLabels[filter.key] ?? filter.label}
           items={filter.items}
-          onSelect={selected => handleSelect(filter.key, selected)}
+          onSelect={(selected) => handleSelect(filter.key, selected)}
         />
       ))}
 
-      <Button variant="outline" className="w-full sm:w-auto" onClick={handleClear}>
+      <Button
+        variant="outline"
+        className="w-full sm:w-auto"
+        onClick={handleClear}
+      >
         Clear Filters
       </Button>
     </div>
