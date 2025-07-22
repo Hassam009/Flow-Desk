@@ -22,11 +22,13 @@ const FilterContext = createContext<FilterContextType | undefined>(undefined);
 
 export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
   const filterKeys: FilterKeys[] = ["Taskstatus", "Userstatus", "priority", "role"];
+  const userId = localStorage.getItem("currentUserId"); 
+
 
   const [filters, setFilters] = useState<Record<FilterKeys, string | null>>(() => {
     const initialState = {} as Record<FilterKeys, string | null>;
     filterKeys.forEach((key) => {
-      initialState[key] = localStorage.getItem(`${key}Filter`);
+      initialState[key] = localStorage.getItem(`${userId}_${key}Filter`);
     });
     return initialState;
   });
@@ -40,19 +42,19 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     filterKeys.forEach((key) => {
-      localStorage.setItem(`${key}Filter`, filters[key] ?? "");
+      localStorage.setItem(`${userId}_${key}Filter`, filters[key] ?? "");
     });
   }, [filters]);
 
   const [selectedLabels, setSelectedLabels] = useState<{ [key: string]: string }>(() => {
-    const stored = localStorage.getItem("selectedLabels");
+    const stored = localStorage.getItem(`${userId}_selectedLabels`);
     return stored ? JSON.parse(stored) : defaultLabels;
   });
 
   const setSelectedLabel = (labelKey: string, value: string) => {
     const updated = { ...selectedLabels, [labelKey]: value };
     setSelectedLabels(updated);
-    localStorage.setItem("selectedLabels", JSON.stringify(updated));
+    localStorage.setItem(`${userId}_selectedLabels`, JSON.stringify(updated));
   };
 
   const resetSelectedLabels = () => {
