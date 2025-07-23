@@ -41,7 +41,7 @@ function handleSignup(data: SignupSchemaType) {
   const newUser = { id: generateIncrementalId(), email, password };
   existingUsers.push(newUser);
   localStorage.setItem("users", JSON.stringify(existingUsers));
-  navigate("/");
+  navigate("/login");
 }
 
   return (

@@ -11,7 +11,7 @@ interface FilterContextType {
   resetAllFilters: () => void;
 }
 
-export const defaultLabels = {
+const defaultLabels = {
   Taskstatus: "Status",
   priority: "Priority",
   role: "Role",
@@ -22,56 +22,89 @@ const FilterContext = createContext<FilterContextType | undefined>(undefined);
 
 export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
   const filterKeys: FilterKeys[] = ["Taskstatus", "Userstatus", "priority", "role"];
-  const userId = localStorage.getItem("currentUserId"); 
+  const [userId, setUserId] = useState(() => localStorage.getItem("userID"));
 
-
-  const [filters, setFilters] = useState<Record<FilterKeys, string | null>>(() => {
-    const initialState = {} as Record<FilterKeys, string | null>;
+  const loadFilters = (uid: string | null): Record<FilterKeys, string | null> => {
+    const state = {} as Record<FilterKeys, string | null>;
+    if (!uid) return state;
     filterKeys.forEach((key) => {
-      initialState[key] = localStorage.getItem(`${userId}_${key}Filter`);
+      state[key] = localStorage.getItem(`${uid}_${key}Filter`);
     });
-    return initialState;
-  });
-
-  const setFilter = (key: FilterKeys, value: string | null) => {
-    setFilters((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+    return state;
   };
 
-  useEffect(() => {
-    filterKeys.forEach((key) => {
-      localStorage.setItem(`${userId}_${key}Filter`, filters[key] ?? "");
-    });
-  }, [filters]);
-
-  const [selectedLabels, setSelectedLabels] = useState<{ [key: string]: string }>(() => {
-    const stored = localStorage.getItem(`${userId}_selectedLabels`);
+  const loadLabels = (uid: string | null): { [key: string]: string } => {
+    if (!uid) return defaultLabels;
+    const stored = localStorage.getItem(`${uid}_selectedLabels`);
     return stored ? JSON.parse(stored) : defaultLabels;
-  });
+  };
+
+  const [filters, setFilters] = useState(() => loadFilters(userId));
+  const [selectedLabels, setSelectedLabels] = useState(() => loadLabels(userId));
+
+  const setFilter = (key: FilterKeys, value: string | null) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
+  };
 
   const setSelectedLabel = (labelKey: string, value: string) => {
-    const updated = { ...selectedLabels, [labelKey]: value };
-    setSelectedLabels(updated);
-    localStorage.setItem(`${userId}_selectedLabels`, JSON.stringify(updated));
+    setSelectedLabels((prev) => ({ ...prev, [labelKey]: value }));
   };
 
   const resetSelectedLabels = () => {
     setSelectedLabels(defaultLabels);
-    localStorage.setItem("selectedLabels", JSON.stringify(defaultLabels));
   };
 
   const resetAllFilters = () => {
     resetSelectedLabels();
-    const resetState: Record<FilterKeys, string | null> = {
+    setFilters({
       Taskstatus: null,
       Userstatus: null,
       priority: null,
       role: null,
-    };
-    setFilters(resetState);
+    });
   };
+
+
+  useEffect(() => {
+    if (!userId) return;
+    filterKeys.forEach((key) => {
+      localStorage.setItem(`${userId}_${key}Filter`, filters[key] ?? "");
+    });
+  }, [filters, userId]);
+
+  useEffect(() => {
+    if (!userId) return;
+    localStorage.setItem(`${userId}_selectedLabels`, JSON.stringify(selectedLabels));
+  }, [selectedLabels, userId]);
+
+  // This effect keeps userId, filters, and selectedLabels in sync with localStorage.userID
+  useEffect(() => {
+    const syncUserId = () => {
+      const current = localStorage.getItem("userID");
+      setUserId(current);
+      setFilters(loadFilters(current));
+      setSelectedLabels(loadLabels(current));
+    };
+
+    // Run once on mount
+    syncUserId();
+
+    // Listen for storage changes (other tabs)
+    window.addEventListener("storage", syncUserId);
+
+    // Listen for userID changes in the same tab (polling or custom event)
+    const interval = setInterval(() => {
+      const current = localStorage.getItem("userID");
+      if (current !== userId) {
+        syncUserId();
+      }
+    }, 200); // Poll every 200ms (fast enough for UI, low CPU)
+
+    return () => {
+      window.removeEventListener("storage", syncUserId);
+      clearInterval(interval);
+    };
+  }, [userId]);
 
   return (
     <FilterContext.Provider

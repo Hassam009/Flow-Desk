@@ -133,7 +133,7 @@ export default function CustomSidebar() {
   <button
     onClick={() => {
       logout();
-      Navigate("/");
+      Navigate("/login");
     }}
     className={cn(
       "flex items-center px-3 py-2 rounded-md w-full transition-colors",

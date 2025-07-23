@@ -23,21 +23,32 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const storedUser = localStorage.getItem("user");
+  
     if (token && storedUser) {
-      setUser(JSON.parse(storedUser));
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+      } catch (error) {
+        console.error("Failed to parse user from localStorage", error);
+        localStorage.removeItem("user");
+      }
     }
+  
     setLoading(false);
   }, []);
+  
 
   const login = (userData: User, token: string) => {
     localStorage.setItem("token", token);
     localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem("userID", JSON.stringify(userData.id));
     setUser(userData);
   };
 
  const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("userID");
     setUser(null);
   };
 

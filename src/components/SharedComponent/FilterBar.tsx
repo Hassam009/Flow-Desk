@@ -24,7 +24,7 @@ export function FilterBar({
   filterConfigs,
   onClear,
 }: FilterBarProps) {
-  const { selectedLabels, setSelectedLabel, resetAllFilters } = useFilter();
+  const { filters, setSelectedLabel, resetAllFilters } = useFilter();
 
   const handleSelect = (filterKey: string, selected: string) => {
     setSelectedLabel(filterKey, selected);
@@ -44,7 +44,7 @@ export function FilterBar({
       {filterConfigs.map((filter) => (
         <FilterDropdown
           key={filter.key}
-          label={selectedLabels[filter.key] ?? filter.label}
+          label={filters[filter.key] || filter.label}
           items={filter.items}
           onSelect={(selected) => handleSelect(filter.key, selected)}
         />
