@@ -16,7 +16,7 @@ export default function App() {
   return (
     <Routes>
       <Route
-        path="/"
+        path="/login"
         element={
           <PublicRoute>
             <LoginPage />

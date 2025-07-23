@@ -13,7 +13,7 @@ export default function PrivateRoute({ children }: PrivateRouteProps) {
   }
 
   if (!isLoggedIn) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return children;
