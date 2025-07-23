@@ -9,7 +9,7 @@ import {
   TableBody,
   TableCell,
 } from "../components/ui/table";
-import {defaultLabels}  from "../context/FilterContext";
+// import {defaultLabels}  from "../context/FilterContext";
 import { Badge } from "../components/ui/badge";
 import {
   MoreHorizontal,
@@ -33,7 +33,7 @@ import { useFilter } from "@/context/FilterContext";
 import { JSX } from "react";
 export default function TaskPage() {
 
-  const { filters, resetAllFilters, setFilter } = useFilter();
+  const { filters, resetTaskFilters, setFilter } = useFilter();
 
   const filteredTasks = TaskData.filter((task) => {
     const statusMatch = filters.Taskstatus ? task.Taskstatus === filters.Taskstatus : true;
@@ -63,7 +63,7 @@ export default function TaskPage() {
 <FilterBar
   placeholder="Filter tasks..."
   onClear={() => {
-    resetAllFilters();
+    resetTaskFilters();
   }}
   filterConfigs={[
     {

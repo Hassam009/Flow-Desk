@@ -24,7 +24,7 @@ export function FilterBar({
   filterConfigs,
   onClear,
 }: FilterBarProps) {
-  const { filters, setSelectedLabel, resetAllFilters } = useFilter();
+  const { filters, setSelectedLabel } = useFilter();
 
   const handleSelect = (filterKey: string, selected: string) => {
     setSelectedLabel(filterKey, selected);
@@ -33,7 +33,8 @@ export function FilterBar({
   };
 
   const handleClear = () => {
-    resetAllFilters();
+    // resetUserFilters();
+    // resetTaskFilters();
     onClear();
   };
 

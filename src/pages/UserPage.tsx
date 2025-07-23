@@ -38,7 +38,7 @@ import { useFilter } from "@/context/FilterContext";
 
 export default function UserPage() {
   const Roles = ["Manager", "Admin", "Cashier", "Superadmin"];
-  const { filters, setFilter, resetAllFilters } = useFilter();
+  const { filters, setFilter, resetUserFilters } = useFilter();
 
   const filteredUsers = UserData.filter((user) => {
     const userMatch = filters.Userstatus
@@ -73,7 +73,7 @@ export default function UserPage() {
       <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-4 w-full">
         <FilterBar
           placeholder="Filter users..."
-          onClear={resetAllFilters}
+          onClear={resetUserFilters}
           filterConfigs={[
             {
               key: "Userstatus",

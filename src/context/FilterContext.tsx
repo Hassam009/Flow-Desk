@@ -8,7 +8,9 @@ interface FilterContextType {
   selectedLabels: { [key: string]: string };
   setSelectedLabel: (labelKey: string, value: string) => void;
   resetSelectedLabels: () => void;
-  resetAllFilters: () => void;
+  // resetAllFilters: () => void;
+  resetTaskFilters: () => void;
+  resetUserFilters: () => void;
 }
 
 const defaultLabels = {
@@ -54,16 +56,44 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
     setSelectedLabels(defaultLabels);
   };
 
-  const resetAllFilters = () => {
-    resetSelectedLabels();
-    setFilters({
-      Taskstatus: null,
-      Userstatus: null,
-      priority: null,
-      role: null,
-    });
-  };
+  // const resetAllFilters = () => {
+  //   resetSelectedLabels();
+  //   setFilters({
+  //     Taskstatus: null,
+  //     Userstatus: null,
+  //     priority: null,
+  //     role: null,
+  //   });
+  // };
 
+  const resetTaskFilters = () => {
+    resetSelectedLabels();
+    setFilters((prev) => ({
+      ...prev,
+      Taskstatus: null,
+      priority: null,
+    }));
+    setSelectedLabels((prev) => ({
+      ...prev,
+      Taskstatus: defaultLabels.Taskstatus,
+      priority: defaultLabels.priority,
+    }));
+  };
+  
+  const resetUserFilters = () => {
+    resetSelectedLabels();
+    setFilters((prev) => ({
+      ...prev,
+      Userstatus: null,
+      role: null,
+    }));
+    setSelectedLabels((prev) => ({
+      ...prev,
+      Userstatus: defaultLabels.Userstatus,
+      role: defaultLabels.role,
+    }));
+  };
+  
 
   useEffect(() => {
     if (!userId) return;
@@ -114,7 +144,8 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
         selectedLabels,
         setSelectedLabel,
         resetSelectedLabels,
-        resetAllFilters,
+        resetTaskFilters,
+        resetUserFilters
       }}
     >
       {children}
