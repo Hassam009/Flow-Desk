@@ -116,6 +116,13 @@ function handleSignup(data: SignupSchemaType) {
           <Button type="submit" className="w-full bg-black text-white hover:bg-gray-900">
     Create Account
   </Button>
+  <Button
+      type="button"
+      className="w-full bg-black text-white hover:bg-gray-900"
+      onClick={() => navigate("/login")}
+    >
+      Login
+    </Button>
   </form>
 
         <CardFooter className="text-xs text-center text-gray-500 mt-4">

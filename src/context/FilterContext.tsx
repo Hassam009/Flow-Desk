@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-type FilterKeys = "Taskstatus" | "Userstatus" | "priority" | "role";
+const filterKeys = ["Taskstatus", "Userstatus", "priority", "role"] as const;
+type FilterKeys = typeof filterKeys[number];
+
 
 interface FilterContextType {
   filters: Record<FilterKeys, string | null>;
