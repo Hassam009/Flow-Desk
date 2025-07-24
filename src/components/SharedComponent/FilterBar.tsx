@@ -5,7 +5,7 @@ import { ReactNode, useState } from "react";
 import { useFilter } from "../../context/FilterContext";
 interface FilterConfig {
   key: string;
-  label: string;
+  label: ReactNode;
   items: {
     label: string;
     icon: ReactNode;

@@ -21,6 +21,8 @@ import {
   Mail,
   PauseCircle,
   Ban,
+  ChevronDown,
+  CircleDot,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -84,7 +86,13 @@ export default function UserPage() {
           filterConfigs={[
             {
               key: "Userstatus",
-              label: "Status",
+              label: (
+                <span className="flex items-center gap-1">
+                  <CircleDot className="w-4 h-4" />
+                  User Status
+                  <ChevronDown className="w-4 h-4" />
+                </span>
+              ),
               onSelect: (val) => setFilter("Userstatus", val),
               items: [
                 { label: "Active", icon: <CheckCircle className="w-4 h-4 text-green-500" /> },
@@ -95,7 +103,13 @@ export default function UserPage() {
             },
             {
               key: "role",
-              label: "Role",
+              label: (
+                <span className="flex items-center gap-1">
+                  <ShieldCheck className="w-4 h-4" />
+                  Role
+                  <ChevronDown className="w-4 h-4" />
+                </span>
+              ),
               onSelect: (val) => setFilter("role", val),
               items: [
                 { label: "Manager", icon: <Users className="w-4 h-4 text-purple-500" /> },
@@ -154,7 +168,7 @@ export default function UserPage() {
                         <MoreHorizontal className="w-5 h-5" />
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end"></DropdownMenuContent>
+                    {/* <DropdownMenuContent align="end"></DropdownMenuContent> */}
                   </DropdownMenu>
                 </TableCell>
               </TableRow>

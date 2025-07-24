@@ -21,6 +21,9 @@ import {
   XCircle,
   CheckCircle,
   AlertCircle,
+  ChevronDown,
+  ListChecks,
+  SignalHigh,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -79,7 +82,13 @@ export default function TaskPage() {
           filterConfigs={[
             {
               key: "Taskstatus",
-              label: "Status",
+              label: (
+                <span className="flex items-center gap-1">
+                  <ListChecks className="w-4 h-4" />
+                  Task Status
+                  <ChevronDown className="w-4 h-4" />
+                </span>
+              ),
               onSelect: (val) => setFilter("Taskstatus", val),
               items: [
                 {
@@ -102,7 +111,13 @@ export default function TaskPage() {
             },
             {
               key: "priority",
-              label: "Priority",
+              label: (
+                <span className="flex items-center gap-1">
+                  <SignalHigh className="w-4 h-4" />
+                  Priority
+                  <ChevronDown className="w-4 h-4" />
+                </span>
+              ),
               onSelect: (val) => setFilter("priority", val),
               items: [
                 { label: "High", icon: <ArrowUp className="w-4 h-4" /> },
@@ -163,7 +178,7 @@ export default function TaskPage() {
                           <MoreHorizontal className="w-5 h-5" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end"></DropdownMenuContent>
+                      {/* <DropdownMenuContent align="end"></DropdownMenuContent> */}
                     </DropdownMenu>
                   </TableCell>
                 </TableRow>
