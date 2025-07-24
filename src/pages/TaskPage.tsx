@@ -86,7 +86,6 @@ export default function TaskPage() {
                 <span className="flex items-center gap-1">
                   <ListChecks className="w-4 h-4" />
                   Task Status
-                  <ChevronDown className="w-4 h-4" />
                 </span>
               ),
               onSelect: (val) => setFilter("Taskstatus", val),
@@ -115,7 +114,6 @@ export default function TaskPage() {
                 <span className="flex items-center gap-1">
                   <SignalHigh className="w-4 h-4" />
                   Priority
-                  <ChevronDown className="w-4 h-4" />
                 </span>
               ),
               onSelect: (val) => setFilter("priority", val),

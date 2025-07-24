@@ -90,7 +90,6 @@ export default function UserPage() {
                 <span className="flex items-center gap-1">
                   <CircleDot className="w-4 h-4" />
                   User Status
-                  <ChevronDown className="w-4 h-4" />
                 </span>
               ),
               onSelect: (val) => setFilter("Userstatus", val),
@@ -107,7 +106,6 @@ export default function UserPage() {
                 <span className="flex items-center gap-1">
                   <ShieldCheck className="w-4 h-4" />
                   Role
-                  <ChevronDown className="w-4 h-4" />
                 </span>
               ),
               onSelect: (val) => setFilter("role", val),
