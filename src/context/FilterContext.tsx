@@ -109,7 +109,6 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.setItem(`${userId}_selectedLabels`, JSON.stringify(selectedLabels));
   }, [selectedLabels, userId]);
 
-  // This effect keeps userId, filters, and selectedLabels in sync with localStorage.userID
   useEffect(() => {
     const syncUserId = () => {
       const current = localStorage.getItem("userID");

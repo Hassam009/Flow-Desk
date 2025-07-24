@@ -35,19 +35,21 @@ import {
 } from "../components/SharedComponent/StatusBade";
 import { FilterBar } from "@/components/SharedComponent/FilterBar";
 import { useFilter } from "@/context/FilterContext";
+import { useState } from "react";
 
 export default function UserPage() {
   const Roles = ["Manager", "Admin", "Cashier", "Superadmin"];
   const { filters, setFilter, resetUserFilters } = useFilter();
-
+  const [inputText, setInputText] = useState("");
   const filteredUsers = UserData.filter((user) => {
+    const searchMatch = user.name.toLowerCase().startsWith(inputText.toLowerCase());
     const userMatch = filters.Userstatus
       ? user.UserStatus.toLowerCase() === filters.Userstatus.toLowerCase()
       : true;
     const roleMatch = filters.role
       ? user.role.toLowerCase() === filters.role.toLowerCase()
       : true;
-    return userMatch && roleMatch;
+    return userMatch && roleMatch && searchMatch;
   });
 
   return (
@@ -72,8 +74,13 @@ export default function UserPage() {
 
       <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-4 w-full">
         <FilterBar
-          placeholder="Filter users..."
-          onClear={resetUserFilters}
+          placeholder="Filter users with name..."
+          onClear={() => {
+            setInputText("");
+            resetUserFilters();
+          }}
+          inputText={inputText}
+          setInputText={setInputText}
           filterConfigs={[
             {
               key: "Userstatus",
@@ -118,7 +125,8 @@ export default function UserPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filteredUsers.map((user, index) => (
+          {filteredUsers.length > 0 ? (
+            filteredUsers.map((user, index) => (
               <TableRow key={index}>
                 <TableCell>
                   <Checkbox />
@@ -150,7 +158,17 @@ export default function UserPage() {
                   </DropdownMenu>
                 </TableCell>
               </TableRow>
-            ))}
+            ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={6}
+                  className="text-center py-6 text-sm text-muted-foreground"
+                >
+                  No matching Users found.
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </div>
